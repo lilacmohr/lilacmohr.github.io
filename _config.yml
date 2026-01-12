@@ -10,6 +10,7 @@ remote_theme: hydecorp/hydejack@v9
 markdown: kramdown
 
 plugins:
+  - jekyll-remote-theme
   - jekyll-seo-tag
   - jekyll-sitemap
   - jekyll-feed
@@ -22,13 +23,13 @@ author:
     name: "Lilac Mohr"
     links:
       - "https://www.linkedin.com/in/lilac-mohr/"
-      - "https://github.com/lilacmohr"
 
 # Hydejack basics
 accent_color: "#00ced1"   # cyan accent (Hydejack uses this widely)
 theme_color: "#0b0f14"    # deep slate/dark background for browser UI
 
 # Sidebar appearance
+sidebar_image: /assets/img/sidebar-circuit.png
 sidebar:
   image: /assets/img/sidebar-circuit.png
   # Optional: if you add a logo later
@@ -51,7 +52,6 @@ social:
   name: "Lilac Mohr"
   links:
     - "https://www.linkedin.com/in/lilac-mohr/"
-    - "https://github.com/lilacmohr"
 
 # Defaults (clean, consistent pages)
 defaults:
