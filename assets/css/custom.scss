@@ -1,0 +1,169 @@
+/* assets/css/custom.scss */
+
+/* 1) Fonts (Google Fonts) */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap");
+
+/* 2) Brand tokens */
+:root {
+  /* Core palette */
+  --bg-0: #0b0f14;          /* deep slate */
+  --bg-1: #0f1720;          /* slightly lighter slate */
+  --fg-0: #e6edf3;          /* near-white text */
+  --fg-1: rgba(230, 237, 243, 0.78);
+  --fg-2: rgba(230, 237, 243, 0.62);
+
+  /* Accents */
+  --teal: #008080;          /* teal */
+  --cyan: #00ced1;          /* cyan */
+  --amber: #ffb000;         /* amber */
+  --amber-soft: rgba(255, 176, 0, 0.18);
+
+  /* “Big Tech” polish */
+  --card: rgba(255, 255, 255, 0.03);
+  --card-border: rgba(255, 255, 255, 0.08);
+  --focus: rgba(0, 206, 209, 0.35);
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+
+  /* Type */
+  --font-sans: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  --font-display: Sora, Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+/* 3) Global typography + baseline */
+html, body {
+  font-family: var(--font-sans);
+  background: var(--bg-0);
+  color: var(--fg-0);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4, .site-title, .page-title {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+h1 { line-height: 1.08; }
+h2 { line-height: 1.15; }
+p, li { line-height: 1.6; color: var(--fg-1); }
+
+code, pre, kbd, samp {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+/* 4) Links and emphasis */
+a {
+  color: var(--cyan);
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.18em;
+}
+a:hover {
+  color: var(--teal);
+}
+
+/* 5) Buttons / call-to-action style */
+.btn, .button, a.button, .cta a {
+  display: inline-block;
+  border-radius: 12px;
+  padding: 0.65rem 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid rgba(0, 206, 209, 0.35);
+  background: linear-gradient(180deg, rgba(0, 206, 209, 0.16), rgba(0, 206, 209, 0.06));
+  box-shadow: 0 10px 24px rgba(0, 206, 209, 0.08);
+  transition: transform 120ms ease, box-shadow 120ms ease, border-color 120ms ease;
+}
+.btn:hover, .button:hover, a.button:hover, .cta a:hover {
+  transform: translateY(-1px);
+  border-color: rgba(0, 206, 209, 0.6);
+  box-shadow: 0 14px 30px rgba(0, 206, 209, 0.12);
+}
+
+/* 6) Cards / panels (nice for playbooks + frameworks lists) */
+.card, .box, .note, blockquote {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+}
+
+/* 7) Blockquotes: subtle “executive memo” vibe + amber accent */
+blockquote {
+  padding: 1rem 1.25rem;
+  position: relative;
+}
+blockquote::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 12px;
+  bottom: 12px;
+  width: 3px;
+  border-radius: 2px;
+  background: linear-gradient(180deg, var(--cyan), var(--amber));
+}
+
+/* 8) Code blocks: clean dark theme, readable */
+pre {
+  background: rgba(15, 23, 32, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+  padding: 1rem 1.1rem;
+  overflow: auto;
+}
+code {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.12em 0.35em;
+  border-radius: 8px;
+}
+
+/* 9) Forms + focus rings (important for polish/accessibility) */
+input, textarea, select {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  color: var(--fg-0);
+  border-radius: 12px;
+}
+:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px var(--focus);
+  border-color: rgba(0, 206, 209, 0.6);
+}
+
+/* 10) Hydejack-specific tweaks (safe, mostly class-based) */
+
+/* Make the main content feel “premium”: width + spacing */
+.content, .page, .post {
+  max-width: 980px;
+}
+
+/* Sidebar overlay readability against your circuit image */
+.sidebar, .sidebar-bg, .sidebar-sticky {
+  background-color: rgba(11, 15, 20, 0.72); /* translucent slate */
+  backdrop-filter: blur(10px);
+}
+
+/* Sidebar links: cyan/amber accents */
+.sidebar a {
+  color: rgba(230, 237, 243, 0.86);
+}
+.sidebar a:hover {
+  color: var(--cyan);
+}
+
+/* Subtle accent rule for headings */
+h2 {
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid rgba(0, 206, 209, 0.20);
+}
+
+/* Optional: highlight “metrics / outcomes” text */
+.highlight-metric {
+  color: var(--amber);
+  background: var(--amber-soft);
+  border: 1px solid rgba(255, 176, 0, 0.20);
+  padding: 0.12em 0.45em;
+  border-radius: 999px;
+  font-weight: 650;
+}
