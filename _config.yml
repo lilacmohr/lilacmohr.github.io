@@ -1,5 +1,5 @@
 # Site
-title: "Lilac Mohr"
+title: "Lilac Mohr :)"
 tagline: "AI Enablement Leader"
 description: "I help engineering organizations operationalize AI to reduce SDLC toil, scale repeatable patterns, and drive measurable outcomes."
 url: "https://lilacmohr.com"
@@ -27,6 +27,9 @@ author:
 # Hydejack basics
 accent_color: "#00ced1"   # cyan accent (Hydejack uses this widely)
 theme_color: "#0b0f14"    # deep slate/dark background for browser UI
+
+# Sidebar background image
+accent_image: /assets/img/sidebar-circuit.png
 
 # Sidebar appearance
 image: null
