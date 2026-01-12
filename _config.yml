@@ -30,7 +30,8 @@ theme_color: "#0b0f14"    # deep slate/dark background for browser UI
 
 # Sidebar appearance
 sidebar:
-  image: /assets/img/sidebar-circuit.png
+  image: https://picsum.photos/800/1600 
+  #/assets/img/sidebar-circuit.png
   # Optional: if you add a logo later
   # logo: /assets/img/logo.png
 
