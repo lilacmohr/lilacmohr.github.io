@@ -1,5 +1,5 @@
 # Site
-title: "Lilac Mohr :)"
+title: "Lilac Mohr"
 tagline: "AI Enablement Leader"
 description: "I help engineering organizations operationalize AI to reduce SDLC toil, scale repeatable patterns, and drive measurable outcomes."
 url: "https://lilacmohr.com"
@@ -31,13 +31,6 @@ theme_color: "#0b0f14"    # deep slate/dark background for browser UI
 # Sidebar background image
 accent_image: /assets/img/sidebar-circuit.png
 
-# Sidebar appearance
-image: null
-sidebar:
-  enabled: true
-  image:
-    path: /assets/img/sidebar-circuit.png
-
   # Optional: if you add a logo later
   # logo: /assets/img/logo.png
 
@@ -45,8 +38,6 @@ sidebar:
 menu:
   - title: "Playbooks"
     url: /playbooks/
-  - title: "Frameworks"
-    url: /frameworks/
   - title: "Case Studies"
     url: /case-studies/
   - title: "About"
