@@ -167,3 +167,29 @@ h2 {
   border-radius: 999px;
   font-weight: 650;
 }
+
+/* Improve sidebar readability */
+.sidebar {
+  background-color: #EEEAF7; /* slightly darker than your current accent */
+}
+
+/* Remove excessive opacity from sidebar overlays */
+.sidebar::before,
+.sidebar-bg::before {
+  opacity: 0.95;
+}
+
+/* Increase text contrast */
+.sidebar,
+.sidebar a,
+.sidebar .site-title,
+.sidebar .site-subtitle,
+.sidebar .nav__link {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+/* Ensure active link stands out */
+.sidebar .nav__link--active {
+  color: #FFFFFF;
+  font-weight: 600;
+}
