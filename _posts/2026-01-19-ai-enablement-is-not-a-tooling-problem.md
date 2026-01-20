@@ -16,7 +16,7 @@ description: >
   challenge that requires trust, learning loops, and better measurement.
 image:
   path: /assets/img/posts/ai-enablement-not-tooling/hero.jpg
-  alt: "Abstract illustration of humans and AI collaborating within an engineering system"
+  alt: "Editorial illustration showing humans and AI collaborating thoughtfully"
 accent_color: "#6B5B95"
 accent_image:
   background: "#F6F4FB"
