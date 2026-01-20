@@ -6,26 +6,31 @@
 /* 1) Fonts (Google Fonts) */
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap");
 
-/* 2) Brand tokens */
+/* 2) Brand tokens (LIGHT, editorial) */
 :root {
   /* Core palette */
-  --bg-0: #0b0f14;          /* deep slate */
-  --bg-1: #0f1720;          /* slightly lighter slate */
-  --fg-0: #e6edf3;          /* near-white text */
-  --fg-1: rgba(230, 237, 243, 0.78);
-  --fg-2: rgba(230, 237, 243, 0.62);
+  --bg-0: #F7F7FB;          /* page background */
+  --bg-1: #FFFFFF;          /* surfaces/cards */
+  --fg-0: rgba(20, 20, 30, 0.92);  /* primary text */
+  --fg-1: rgba(20, 20, 30, 0.76);  /* body text */
+  --fg-2: rgba(20, 20, 30, 0.58);  /* secondary text */
 
-  /* Accents */
-  --teal: #008080;          /* teal */
-  --cyan: #00ced1;          /* cyan */
-  --amber: #ffb000;         /* amber */
-  --amber-soft: rgba(255, 176, 0, 0.18);
+  /* Brand accent (match _config.yml) */
+  --accent: #6B5B95;        /* lavender */
+  --accent-2: #2F3A4A;      /* slate (optional depth) */
+  --accent-soft: rgba(107, 91, 149, 0.12);
 
-  /* “Big Tech” polish */
-  --card: rgba(255, 255, 255, 0.03);
-  --card-border: rgba(255, 255, 255, 0.08);
-  --focus: rgba(0, 206, 209, 0.35);
-  --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  /* Warm highlight (for callouts / “metric” chips) */
+  --amber: #B7791F;
+  --amber-soft: rgba(183, 121, 31, 0.12);
+
+  /* Surfaces */
+  --card: rgba(255, 255, 255, 0.82);
+  --card-border: rgba(20, 20, 30, 0.08);
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+
+  /* Focus ring */
+  --focus: rgba(107, 91, 149, 0.28);
 
   /* Type */
   --font-sans: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
@@ -48,7 +53,7 @@ h1, h2, h3, h4, .site-title, .page-title {
 
 h1 { line-height: 1.08; }
 h2 { line-height: 1.15; }
-p, li { line-height: 1.6; color: var(--fg-1); }
+p, li { line-height: 1.75; color: var(--fg-1); }
 
 code, pre, kbd, samp {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
@@ -56,33 +61,33 @@ code, pre, kbd, samp {
 
 /* 4) Links and emphasis */
 a {
-  color: var(--cyan);
+  color: var(--accent);
   text-decoration-thickness: 0.08em;
   text-underline-offset: 0.18em;
 }
 a:hover {
-  color: var(--teal);
+  color: rgba(107, 91, 149, 0.82);
 }
 
-/* 5) Buttons / call-to-action style */
+/* 5) Buttons / CTAs (subtle, leadership tone) */
 .btn, .button, a.button, .cta a {
   display: inline-block;
   border-radius: 12px;
   padding: 0.65rem 1rem;
-  font-weight: 600;
+  font-weight: 650;
   text-decoration: none;
-  border: 1px solid rgba(0, 206, 209, 0.35);
-  background: linear-gradient(180deg, rgba(0, 206, 209, 0.16), rgba(0, 206, 209, 0.06));
-  box-shadow: 0 10px 24px rgba(0, 206, 209, 0.08);
+  border: 1px solid rgba(107, 91, 149, 0.26);
+  background: linear-gradient(180deg, rgba(107, 91, 149, 0.14), rgba(107, 91, 149, 0.06));
+  box-shadow: 0 10px 24px rgba(107, 91, 149, 0.10);
   transition: transform 120ms ease, box-shadow 120ms ease, border-color 120ms ease;
 }
 .btn:hover, .button:hover, a.button:hover, .cta a:hover {
   transform: translateY(-1px);
-  border-color: rgba(0, 206, 209, 0.6);
-  box-shadow: 0 14px 30px rgba(0, 206, 209, 0.12);
+  border-color: rgba(107, 91, 149, 0.42);
+  box-shadow: 0 14px 30px rgba(107, 91, 149, 0.14);
 }
 
-/* 6) Cards / panels (nice for playbooks + frameworks lists) */
+/* 6) Cards / panels (nice for playbooks + framework lists) */
 .card, .box, .note, blockquote {
   background: var(--card);
   border: 1px solid var(--card-border);
@@ -90,10 +95,11 @@ a:hover {
   box-shadow: var(--shadow);
 }
 
-/* 7) Blockquotes: subtle “executive memo” vibe + amber accent */
+/* 7) Blockquotes: “executive memo” vibe (lavender + warm accent) */
 blockquote {
   padding: 1rem 1.25rem;
   position: relative;
+  color: var(--fg-1);
 }
 blockquote::before {
   content: "";
@@ -103,96 +109,96 @@ blockquote::before {
   bottom: 12px;
   width: 3px;
   border-radius: 2px;
-  background: linear-gradient(180deg, var(--cyan), var(--amber));
+  background: linear-gradient(180deg, var(--accent), var(--amber));
 }
 
-/* 8) Code blocks: clean dark theme, readable */
+/* 8) Code blocks: readable on light */
 pre {
-  background: rgba(15, 23, 32, 0.92);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(20, 20, 30, 0.04);
+  border: 1px solid rgba(20, 20, 30, 0.08);
   border-radius: 14px;
   padding: 1rem 1.1rem;
   overflow: auto;
 }
 code {
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(107, 91, 149, 0.08);
+  border: 1px solid rgba(107, 91, 149, 0.14);
   padding: 0.12em 0.35em;
   border-radius: 8px;
 }
 
-/* 9) Forms + focus rings (important for polish/accessibility) */
+/* 9) Forms + focus rings */
 input, textarea, select {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: rgba(255, 255, 255, 0.86);
+  border: 1px solid rgba(20, 20, 30, 0.12);
   color: var(--fg-0);
   border-radius: 12px;
 }
 :focus-visible {
   outline: none;
   box-shadow: 0 0 0 4px var(--focus);
-  border-color: rgba(0, 206, 209, 0.6);
+  border-color: rgba(107, 91, 149, 0.40);
 }
 
-/* 10) Hydejack-specific tweaks (safe, mostly class-based) */
+/* 10) Hydejack-specific tweaks */
 
-/* Make the main content feel “premium”: width + spacing */
+/* Make the main content feel premium: readable line length */
 .content, .page, .post {
   max-width: 980px;
 }
 
-/* Sidebar overlay readability against your circuit image */
-.sidebar, .sidebar-bg, .sidebar-sticky {
-  background-color: rgba(11, 15, 20, 0.72); /* translucent slate */
-  backdrop-filter: blur(10px);
-}
-
-/* Sidebar links: cyan/amber accents */
-.sidebar a {
-  color: rgba(230, 237, 243, 0.86);
-}
-.sidebar a:hover {
-  color: var(--cyan);
-}
-
-/* Subtle accent rule for headings */
+/* Gentle heading accent rule */
 h2 {
   padding-bottom: 0.3rem;
-  border-bottom: 1px solid rgba(0, 206, 209, 0.20);
+  border-bottom: 1px solid rgba(107, 91, 149, 0.18);
 }
 
-/* Optional: highlight “metrics / outcomes” text */
+/* Optional: highlight chip for “metrics / outcomes” text */
 .highlight-metric {
-  color: var(--amber);
+  color: rgba(20, 20, 30, 0.88);
   background: var(--amber-soft);
-  border: 1px solid rgba(255, 176, 0, 0.20);
+  border: 1px solid rgba(183, 121, 31, 0.18);
   padding: 0.12em 0.45em;
   border-radius: 999px;
   font-weight: 650;
 }
 
-/* Improve sidebar readability */
-.sidebar {
-  background-color: #EEEAF7; /* slightly darker than your current accent */
-}
+/* Sidebar: light, readable, not blocky */
+@media (min-width: 64em) {
+  .sidebar {
+    background: #F6F4FB;
+  }
 
-/* Remove excessive opacity from sidebar overlays */
-.sidebar::before,
-.sidebar-bg::before {
-  opacity: 0.95;
-}
+  .sidebar .content {
+    background: rgba(255, 255, 255, 0.78);
+    border: 1px solid rgba(20, 20, 30, 0.08);
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
 
-/* Increase text contrast */
-.sidebar,
-.sidebar a,
-.sidebar .site-title,
-.sidebar .site-subtitle,
-.sidebar .nav__link {
-  color: rgba(255, 255, 255, 0.95);
-}
+  .sidebar,
+  .sidebar a,
+  .sidebar .site-title,
+  .sidebar .site-subtitle,
+  .sidebar .nav__link {
+    color: rgba(20, 20, 30, 0.86);
+  }
 
-/* Ensure active link stands out */
-.sidebar .nav__link--active {
-  color: #FFFFFF;
-  font-weight: 600;
+  .sidebar a:hover,
+  .sidebar .nav__link:hover {
+    color: rgba(20, 20, 30, 0.98);
+  }
+
+  .sidebar .nav__link--active {
+    color: rgba(20, 20, 30, 0.98);
+    font-weight: 650;
+    text-decoration: none;
+  }
+
+  .sidebar .site-title {
+    font-weight: 750;
+    letter-spacing: 0.01em;
+  }
 }

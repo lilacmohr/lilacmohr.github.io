@@ -3,7 +3,7 @@ title: "Lilac Mohr"
 tagline: "AI Enablement Leader"
 description: "I help engineering organizations operationalize AI to reduce SDLC toil, scale repeatable patterns, and drive measurable outcomes."
 url: "https://lilacmohr.com"
-baseurl: ""  # keep empty for GitHub Pages custom domain root
+baseurl: ""  # keep empty for custom domain root
 
 # Build
 remote_theme: hydecorp/hydejack@v9
@@ -24,15 +24,14 @@ author:
     links:
       - "https://www.linkedin.com/in/lilac-mohr/"
 
-# Hydejack basics
-accent_color: "#00ced1"   # cyan accent (Hydejack uses this widely)
-theme_color: "#0b0f14"    # deep slate/dark background for browser UI
+# Hydejack / Branding (Light, editorial palette)
+accent_color: "#6B5B95"   # soft lavender (authoritative, warm, editorial)
+theme_color: "#F7F7FB"    # light browser UI color (mobile address bar, etc.)
 
-# Sidebar background image
-accent_image: /assets/img/sidebar-circuit.png
-
-  # Optional: if you add a logo later
-  # logo: /assets/img/logo.png
+# Sidebar background (use Hydejack image object format)
+accent_image:
+  path: /assets/img/sidebar-circuit.png
+  background: "#F6F4FB"
 
 # Top-level navigation (shows in sidebar)
 menu:
@@ -43,20 +42,32 @@ menu:
   - title: "About"
     url: /about/
 
-# Optional: footer links / social
-# (Hydejack will also pick up author.social.links above for SEO)
+# Social (used by jekyll-seo-tag)
 social:
   name: "Lilac Mohr"
   links:
     - "https://www.linkedin.com/in/lilac-mohr/"
 
-# Defaults (clean, consistent pages)
+# Defaults
 defaults:
+  # Pages
   - scope:
       path: ""
+      type: pages
     values:
       layout: page
       comments: false
+
+  # Posts
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+      comments: false
+      accent_color: "#6B5B95"
+      accent_image:
+        background: "#F6F4FB"
 
 # Permalinks
 permalink: /:categories/:title/
@@ -68,3 +79,4 @@ exclude:
   - Gemfile.lock
   - node_modules
   - vendor
+  
