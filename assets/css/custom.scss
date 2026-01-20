@@ -202,3 +202,18 @@ h2 {
     letter-spacing: 0.01em;
   }
 }
+
+/* =========================================
+   Hide top header bar on article pages
+   ========================================= */
+
+.page--post .navbar,
+.page--post .content-header,
+.page--post .page__header {
+  display: none;
+}
+
+/* Remove extra spacing left behind */
+.page--post {
+  padding-top: 0;
+}
