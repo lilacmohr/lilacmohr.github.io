@@ -217,3 +217,18 @@ h2 {
 .page--post {
   padding-top: 0;
 }
+
+/* Sidebar author photo */
+.sidebar-author {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.sidebar-author__photo {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
