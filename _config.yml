@@ -19,6 +19,7 @@ plugins:
 author:
   name: "Lilac Mohr"
   email: ""
+  picture: /assets/img/lilac-mohr-headshot1.png
   social:
     name: "Lilac Mohr"
     links:
@@ -79,4 +80,3 @@ exclude:
   - Gemfile.lock
   - node_modules
   - vendor
-  
