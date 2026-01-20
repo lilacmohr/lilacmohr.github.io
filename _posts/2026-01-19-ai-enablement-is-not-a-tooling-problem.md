@@ -15,7 +15,7 @@ description: >
   AI enablement is not a tooling rollout problem. It’s a behavior and systems
   challenge that requires trust, learning loops, and better measurement.
 image:
-  path: /assets/img/posts/ai-enablement-not-tooling/hero.jpg
+  path: /assets/img/posts/ai-enablement-not-tooling/hero.png
   alt: "Editorial illustration showing humans and AI collaborating thoughtfully"
 accent_color: "#6B5B95"
 accent_image:
