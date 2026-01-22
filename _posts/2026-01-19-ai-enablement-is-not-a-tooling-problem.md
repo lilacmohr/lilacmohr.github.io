@@ -24,20 +24,13 @@ accent_image:
 
 # AI Enablement Is Not a Tooling Problem
 
-In 2022, our leadership team set an OKR that sounded reasonable on paper:  
-**get 100% of engineers to install GitHub Copilot**.
+In 2022, the software industry was buzzing as articles predicted 10× productivity from AI coding tools. The leaders of my company at the time were excited about the potential and moved quickly, setting an OKR to put GitHub Copilot into every engineer’s IDE. I was curious too, but more reserved. My career began in the late ’90s, and I’d seen enough “transformations” to know that tools alone rarely deliver change without shifts in how teams work.
 
-Engineers complied. The rollout looked clean. The dashboard went green. Executives declared success.
+Engineers complied with the Copilot mandate, and the OKR was marked green: a success. Leadership moved on to other organizational goals. A couple of months later, a GitHub CSM produced a report showing that around 30% of our code was now being written by Copilot. This surprised me, since Copilot was just an autocomplete tool at the time (prior to the introduction of chat). I looked at the metrics our team was tracking - cycle time, PR throughput, change failure rate, and others - and nothing had moved. The work didn’t feel meaningfully different. The system wasn’t behaving differently. We had achieved installation, not enablement.
 
-And then… nothing.
+Working for a company in the Software Engineering Intelligence (SEI) space, I should have known better. Just as lines of code is not a good metric for telling the story of a software engineering team’s contributions, the same applies to AI coding: **activity is not the same thing as impact**.
 
-When I looked at the metrics we cared about—cycle time, PR throughput, MTTR, change failure rate—**nothing had moved**. The work didn’t feel meaningfully different. The system wasn’t behaving differently. We had achieved installation, not enablement.
-
-That was the moment the phrase *AI enablement* changed shape for me. Not because I stopped believing in the tools. I still do. But because I realized that **tool adoption is an activity**, and activity is not the same thing as impact.
-
-**AI enablement isn’t a tooling problem.**  
-It’s a behavior change problem.  
-And behavior change is always an organizational problem.
+AI enablement isn’t a tooling problem, it’s a holistic problem that starts with culture and values, is supported by principles and training, and ultimately leads to behavior change that drives not vanity metrics, but real results.
 
 ---
 
