@@ -50,52 +50,28 @@ That focus group made something click for me. AI enablement wasn’t failing bec
 
 ---
 
-## What we found when we stopped mandating and started observing
+## What we found when we stopped counting usage and started defining outcomes
 
-After the metrics didn’t budge, we could have pushed harder. We could have mandated training, required usage, or published adoption dashboards.
+Once the patterns from the focus group were clear, the next step wasn’t more rollout—it was alignment. If “percent of code written by AI” wasn’t telling us anything useful, we needed to be explicit about what better actually looked like.
 
-We didn’t.
+Ten-times productivity was never a realistic goal. What we were looking for was something more grounded: fewer tedious tasks, smoother reviews, and less friction in everyday work. We wanted engineers spending more time thinking and less time fighting the mechanics of the code.
 
-Instead, I partnered with product and engineering leaders to form a **voluntary Copilot focus group** across teams. The goal wasn’t compliance. It was curiosity:
+With that in mind, the focus group shifted from whether Copilot was being used to how it was being used. We stopped asking about adoption and started talking about outcomes. Where did it help? Where did it slow things down? What felt safer? What didn’t?
 
-*How is the tool actually being used? What’s helping? What’s getting in the way?*
+A small group of curious engineers became informal champions. They experimented in low-risk areas, shared what worked, and were candid about what didn’t. Over time, patterns emerged—not in usage numbers, but in behavior. Pull requests became easier to review. Certain classes of work moved faster. Engineers were more confident about when to lean on AI and when to ignore it.
 
-At the time, Copilot felt mostly like autocomplete. Many engineers didn’t see it as materially better than their IDE. As we listened, three groups emerged:
+Those weren’t headline-worthy metrics, but they were real. They reflected changes in judgment, workflow, and trust—things that don’t show up in an adoption dashboard, but actually move the system.
 
-- **Skeptics** who didn’t want to ship code they didn’t understand  
-- **Wait-and-see adopters** who were open but unconvinced  
-- **Curious engineers** who wanted to learn but lacked techniques and safety  
-
-That third group became the fulcrum.
-
-We focused on creating **psychological safety around experimentation** — no productivity pressure, no forced adoption. Engineers started with low-risk use cases like schema updates and unit tests, then progressed to more complex refactors and feature work.
-
-Not because the tool suddenly improved —  
-but because **judgment and confidence did**.
-
-That’s enablement.
-
+That’s when it became clear that measuring AI impact required a different lens. Not “how much was used,” but whether the work itself was getting better.
 ---
 
-## Why “AI-first” can quietly mislead
+## Champions Emerged
 
-Most “AI-first” declarations are made in good faith. Leaders want to signal urgency and commitment.
+As the focus group shifted toward outcomes and learning, a small set of champions began to emerge organically. One of them realized that Copilot, at the time, wasn’t quite meeting his needs and decided to try Cursor instead. The important part wasn’t the tool switch—it was the way he approached it: thoughtfully, with clear criteria for what he was trying to improve, and a willingness to share what he learned.
 
-The problem isn’t ambition — it’s definition.
+He didn’t just change tools and move on. He came back to the group, talked through the tradeoffs, and hosted a lunch-and-learn to walk through his workflow. His excitement was contagious—not because everyone should use the same tool, but because it modeled something powerful: engineers having the agency to evaluate tools critically and bring informed recommendations back to the organization.
 
-When AI enablement is defined as a tooling problem, success gets measured in the easiest available ways:
-
-- licenses provisioned  
-- usage rates  
-- prompts executed  
-- lines of code generated  
-
-Those metrics aren’t wrong. They’re just shallow.
-
-AI doesn’t just change how fast code is written.  
-It changes **where effort lives** — often shifting work from implementation into review, verification, and coordination.
-
-If you don’t look for those shifts, you’ll miss them entirely.
+That experience reinforced a lesson I’ve seen play out many times. Enablement doesn’t come from locking in a tool and hoping for adoption. It comes from creating space for experimentation, setting clear guardrails around security and cost, and letting trusted engineers help lead the learning.
 
 ---
 
