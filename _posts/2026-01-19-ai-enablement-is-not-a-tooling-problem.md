@@ -63,6 +63,7 @@ A small group of curious engineers became informal champions. They experimented 
 Those weren’t headline-worthy metrics, but they were real. They reflected changes in judgment, workflow, and trust—things that don’t show up in an adoption dashboard, but actually move the system.
 
 That’s when it became clear that measuring AI impact required a different lens. Not “how much was used,” but whether the work itself was getting better.
+
 ---
 
 ## Champions Emerged
