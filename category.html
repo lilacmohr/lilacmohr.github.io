@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Category - AI Engineering Leadership</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Lilac Mohr</a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="category.html?cat=implementation" data-category="implementation">AI Implementation</a>
+                <a href="category.html?cat=measurement-strategy" data-category="measurement-strategy">Measurement & Strategy</a>
+                <a href="category.html?cat=culture" data-category="culture">Culture</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Side-scrolling Category Navigation -->
+    <div class="category-nav">
+        <div class="category-nav-container">
+            <!-- Populated dynamically with articles in this category -->
+        </div>
+    </div>
+
+    <!-- Category Articles -->
+    <section class="articles-section">
+        <div class="container">
+            <h2 class="section-title" id="category-title">Category</h2>
+            <div id="category-articles" class="articles-grid">
+                <!-- Dynamically populated -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <span class="footer-brand">Lilac Mohr</span>
+            <div class="footer-links">
+                <a href="https://www.linkedin.com/in/lilac-mohr/" target="_blank" rel="noopener">LinkedIn</a>
+                <p>&copy; 2026 All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
