@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cognitive Drain: The Silent Risk of AI-Assisted Development — Lilac Mohr</title>
+    <meta name="description" content="An engineer told me: 'I enjoy working with a coding agent, but after a while I feel like I don't know my own code anymore.' This article names the pattern as cognitive drain: teams ship faster while understanding forms more slowly, decision rationale goes uncaptured, and confidence in changing core systems erodes long before traditional delivery metrics show trouble.">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Lilac Mohr">
+    <meta property="og:title" content="Cognitive Drain: The Silent Risk of AI-Assisted Development">
+    <meta property="og:description" content="An engineer told me: 'I enjoy working with a coding agent, but after a while I feel like I don't know my own code anymore.' This article names the pattern as cognitive drain: teams ship faster while understanding forms more slowly, decision rationale goes uncaptured, and confidence in changing core systems erodes long before traditional delivery metrics show trouble.">
+    <meta property="og:url" content="https://lilacmohr.github.io/articles/cognitive-drain-problem.html">
+    <meta property="og:image" content="https://lilacmohr.github.io/images/hero-cognitive-drain-problem.png">
+    <meta property="article:published_time" content="2026-03-04">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Cognitive Drain: The Silent Risk of AI-Assisted Development">
+    <meta name="twitter:description" content="An engineer told me: 'I enjoy working with a coding agent, but after a while I feel like I don't know my own code anymore.' This article names the pattern as cognitive drain: teams ship faster while understanding forms more slowly, decision rationale goes uncaptured, and confidence in changing core systems erodes long before traditional delivery metrics show trouble.">
+    <meta name="twitter:image" content="https://lilacmohr.github.io/images/hero-cognitive-drain-problem.png">
+
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="/index.html" class="logo">Lilac Mohr</a>
+            <div class="nav-links">
+                <a href="/index.html">Home</a>
+                <a href="/category.html?cat=implementation">AI Implementation</a>
+                <a href="/category.html?cat=measurement-strategy">Measurement &amp; Strategy</a>
+                <a href="/category.html?cat=culture">Culture</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Article Header -->
+    <header class="article-header">
+        <div class="article-header-inner">
+            <p class="article-breadcrumb"><a href="/index.html">← All Articles</a></p>
+            <h1 class="article-page-title">Cognitive Drain: The Silent Risk of AI-Assisted Development</h1>
+            <div class="article-page-meta">
+                <span>AI Implementation</span>
+                <span>March 4, 2026</span>
+                <span>13 min read</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Article Hero Image -->
+    <div class="article-hero-image" id="article-hero-image">
+        <img src="/images/hero-cognitive-drain-problem.png" alt="Cognitive Drain: The Silent Risk of AI-Assisted Development">
+    </div>
+
+    <!-- Article Body -->
+    <article class="article-body">
+        <h1>Cognitive Drain: The Silent Risk of AI-Assisted Development</h1>
+<p><em>Part one of a three-part series. Part two: <a href="article.html?id=what-just-happened">What Just Happened? Capturing Engineering Decisions in the Age of AI</a>. Part three: <a href="article.html?id=building-the-memory-layer">Building the Memory Layer: Scaling Decision Capture Across Your Organization</a>.</em></p>
+<p>An engineer told me recently: &quot;I enjoy working with a coding agent, but after a while I feel like I don&#39;t know my own code anymore... and that scares me.&quot;</p>
+<p>I could relate to that feeling. My thoughts immediately went to a recent experience — I&#39;m sure you have one, too — where I realized that a memory I thought was ingrained was simply gone. I wasn&#39;t able to identify when or how I&#39;d lost it, and <em>that</em> scared me the most. That kind of loss — gradual, invisible, and impossible to timestamp — is the hardest kind to prepare for. You don&#39;t see it coming or notice it leaving; one day you reach for something and it simply isn&#39;t there.</p>
+<p>The same thing happens to teams, just distributed across every engineer and far slower to surface.</p>
+<p>Picture a pool that&#39;s slowly losing water — not from a visible leak or a dramatic rupture, but seeping steadily through a hairline crack somewhere in the foundation. The water level drops a fraction of an inch every day. The pool still looks fine, people are still swimming, and your metrics say everything is normal. And then one morning, without any single event you can point to, the water is too shallow to dive in.</p>
+<p>That&#39;s what AI coding agents are doing to your team&#39;s system knowledge right now. Engineers aren&#39;t losing their skills or becoming less capable overnight. They&#39;re shipping more than ever. But every time a coding agent writes a solution that an engineer accepts without fully reconstructing the reasoning, a small amount of system understanding fails to form. Every time a PR merges because tests passed and the AI flagged it as low risk — without anyone articulating why the approach was chosen over alternatives — a small piece of design rationale goes uncaptured. Multiply that across multiple teams, across months, and you get an organization that is objectively shipping faster while quietly losing its collective ability to understand, extend, and confidently change what it&#39;s building.</p>
+<p>There&#39;s a term for this phenomenon — cognitive debt, or cognitive drain. Like reaching for a memory and finding nothing there, most engineering leaders won&#39;t notice the loss until the water is already too low.</p>
+<hr>
+<h2>The Old Risk Had a Face</h2>
+<p>Even before the prevalence of AI in software development, institutional or tribal knowledge lived in the heads of engineers. It&#39;s the type of knowledge that can&#39;t be downloaded: the accumulation of experiences building an organization&#39;s systems, solving problems, and making mistakes. It&#39;s also a well-known risk — one that leaders have been working to mitigate for years, under the label &#39;bus factor&#39; (or &#39;win the lottery factor&#39;, as I like to reframe it).</p>
+<p>I experienced the acute version of this firsthand. When a principal engineer on my team announced he was leaving, the panic was immediate and unanimous. Everyone understood what was walking out the door with him. The question &quot;what does this code do?&quot; wasn&#39;t the concern — AI could help us with that. What we feared losing was the deeper tacit knowledge built over years in the trenches: why the service boundary between two components was drawn where it was, which integration assumptions had quietly become load-bearing, and what had been tried before the current architecture and why it failed. We scrambled to organize knowledge transfer sessions and record brain dumps. It helped, but it was reactive and fragile, triggered by a departure date and dependent on asking the right questions before the wrong moment.</p>
+<p>The traditional &#39;bus factor&#39; risk is real, but it has one property that makes it navigable: it is visible. There is a face attached to it, a calendar event, and a clear moment of loss that you can point to and organize a response around.</p>
+<p>What AI coding agents are introducing is categorically different. There&#39;s no departure, no trigger event, and no single moment you can point to and say &quot;that&#39;s when we lost it.&quot; The drain is gradual, distributed across every engineer on the team, and invisible to every metric most organizations are currently tracking. Velocity is up, deployment frequency is up, and incidents haven&#39;t spiked. But somewhere underneath all of that, your team&#39;s shared understanding of its own system is getting shallower every sprint.</p>
+<hr>
+<h2>Why AI Accelerates the Drain</h2>
+<p>To understand why AI specifically accelerates organizational knowledge loss, we need to look at how engineers built system knowledge before agents existed. It wasn&#39;t from documentation — most engineers will tell you documentation is always out of date. It was from the act of writing and debugging code itself: struggling through a problem, making decisions, encountering failure, and building a mental model through direct engagement with the system. That process was slow and sometimes frustrating, but it was also how understanding formed and accumulated. When onboarding new engineers, I don&#39;t want them to spend weeks reading through documentation; I want them to jump right into the code and solve problems. They&#39;ll struggle at first, but that&#39;s how they&#39;ll begin building system knowledge.</p>
+<p>Coding agents short-circuit that process — they don&#39;t eliminate the work so much as they change its nature, and how much depends on how much autonomy the agent has.</p>
+<p>In the AI-assisted model that most teams use today, engineers still drive problem-solving but at a higher level of abstraction, delegating implementation decisions to the agent. That&#39;s often a genuine improvement where engineers spend less time on boilerplate code and more time on design. But it also means engineers are increasingly removed from the lower-level implementation decisions where system knowledge actually forms. In fully agentic systems, the shift goes further: the engineer becomes a reviewer and approver, distanced from both the reasoning and the result. Most organizations are at the first stage today, though the second is arriving quickly.</p>
+<p>In both cases, reviewing AI-generated code does not produce the same depth of system understanding that writing it does — especially when that review is optimized for correctness rather than comprehension.</p>
+<p>For years I told junior engineers that reviewing pull requests was one of the best ways to learn a codebase. A front-end engineer who wanted to understand the backend should start reviewing backend PRs — read the code, ask questions, and build a mental model through repeated exposure. It worked, because that advice assumed the reviewer was engaging with decisions a human made, with reasoning that could be surfaced by asking &quot;why did you do it this way?&quot; Reviewing AI-generated code for correctness doesn&#39;t work the same way. The questions are different, the reasoning trail is thinner, and the review is optimized for &quot;does this work and is it safe to ship?&quot; — not &quot;do I understand why this system is shaped this way?&quot; Those are different cognitive activities, which is why the industry&#39;s current response to this problem — engineers still own and must carefully review all AI-generated code — is necessary but not sufficient. Accountability and comprehension are not the same thing.</p>
+<p><img src="/images/ai-engagement-and-understanding.png" alt="How your engagement with AI shapes system understanding"></p>
+<p>Early research on cognitive engagement during AI-assisted work tells a sobering story. A <a href="https://www.media.mit.edu/publications/your-brain-on-chatgpt/">2025 MIT Media Lab study</a> used EEG to measure brain activity while participants completed writing tasks with and without AI assistance. Participants using LLMs showed the weakest neural connectivity overall, with notably lower engagement in prefrontal areas associated with deep reasoning and decision-making, compared to those using search engines or no tools at all. The work felt productive and the output looked correct, but the comprehension simply wasn&#39;t forming at the same depth.</p>
+<p>I want to be honest about the limits of that evidence: the MIT study was initially published as a preprint, and the research is still early. What I&#39;m drawing on is the intersection of that research and a couple of years of watching for this pattern deliberately in postmortems, in code reviews, and in conversations with engineering leaders who have started asking the same questions. The data isn&#39;t definitive, but the pattern shows up often enough that I&#39;ve stopped treating it as theoretical.</p>
+<p>The clearest illustration I have came from analyzing my own behavior. I recently built a tool to analyze my own Copilot interaction logs, with a goal of visualizing the flow of work and understanding collaboration behavior. One aspect of this tool is using an LLM to infer prompt intent, to tell the story of what I was trying to accomplish in each session. When I looked at my data, the majority of my prompts weren&#39;t aimed at writing new features or fixing bugs, as I would have expected. They were questions about my own code: <em>What script runs the pipeline? What is this function doing? Where is the logic that handles X? Why was this decision made?</em></p>
+<p>I had worked closely with my AI coding assistant throughout the project, acting as orchestrator and project manager. I understood what I&#39;d built conceptually, but I was completely detached from the execution details — asking questions about code I&#39;d nominally authored as if I were a new hire onboarding to someone else&#39;s system. The project was a low-stakes prototype, so the consequences were manageable, but the pattern was not reassuring. On a team working with AI on production code — even one where engineers are reviewing AI-generated pull requests for correctness and risk — this same detachment doesn&#39;t stay theoretical for long.</p>
+<p>The effect compounds in a way that technical debt doesn&#39;t. Technical debt is a property of the code — even if no one fixes it, it&#39;s still there to be found. Cognitive drain is a property of people&#39;s understanding, and unlike code, understanding cannot be recovered by simply reading the commit history.</p>
+<p>The pattern that emerges in practice points in one direction: teams that hit critical cognitive drain don&#39;t just slow down — they reach a point of genuine paralysis, unable to make confident architectural decisions, unsure how to diagnose unexpected behavior, or quietly avoiding changes that feel too risky to make. Researcher Margaret-Anne Storey <a href="https://margaretstorey.com/blog/2026/02/09/cognitive-debt/">describes student development teams</a> who, after just weeks of prioritizing speed over comprehension, were completely unable to make simple changes — not because the code was too complex, but because no one could explain why design decisions had been made or how different parts of the system were supposed to work together. The code was still there, but the theory behind it had drained away.</p>
+<p>Every team reaches this point on a different timeline, but the dynamic is the same.</p>
+<p>There&#39;s an assumption embedded in how most teams think about this risk: that even if engineers aren&#39;t retaining system knowledge as deeply as they used to, the AI is. That the reasoning is <em>somewhere</em> — in the model, in the chat history, retrievable if you need it. It isn&#39;t. AI coding agent sessions are stateless by default. The back-and-forth your engineer had with the agent to arrive at an architectural decision — the alternatives that were considered, the constraints that shaped the approach, the assumptions baked into the final choice — disappears when the session closes. It was never written down or committed — it lived in a conversation window, and then it didn&#39;t. The knowledge isn&#39;t shifting from human brains to AI brains; it&#39;s evaporating. Cognitive drain isn&#39;t a transfer problem. It&#39;s a loss problem.</p>
+<p><img src="/images/cognitive-drain-transfer-quote.png" alt="Cognitive drain isn&#39;t a transfer problem. It&#39;s a loss problem."></p>
+<hr>
+<h2>What Cognitive Drain Looks Like Before You Name It</h2>
+<p>Part of what makes this risk hard to manage is that it doesn&#39;t produce an immediate incident — the signals are softer, earlier, and easy to rationalize as other things.</p>
+<p>The most diagnostic signal I&#39;ve found is what happens in incident postmortems. When cognitive drain has taken hold, the team can describe what happened but struggles to explain why the system was designed to behave that way. &quot;I&#39;m not sure why it does that&quot; in an incident review isn&#39;t a performance problem — it&#39;s a comprehension signal, and it surfaces there before it surfaces anywhere else.</p>
+<p>A subtler tell is escalation creep. Mid-level engineers start routing &quot;is this the right approach?&quot; questions to Staff+ for decisions that should be within their existing context. It can look like healthy mentorship, but what&#39;s actually happening is that the ambient shared knowledge engineers would normally draw on quietly isn&#39;t there anymore, and the questions migrate upward to fill the gap.</p>
+<p>Then there are pull requests that cross service boundaries or touch shared contracts with no annotation of the dependency reasoning. You can read every line of the diff and still not know why the change was made this way — what the alternative was, what constraint ruled it out, or whether the engineer who wrote it understood the contract they were modifying. Tests pass, the AI risk summary looks fine, and it ships. The decision rationale exists nowhere in the codebase — not in the PR description, not in a commit message, not anywhere.</p>
+<p>If you&#39;re seeing any of this on your team, the drain is already underway.</p>
+<hr>
+<h2>The Question Underneath the Metrics</h2>
+<p>For most teams right now, the shared understanding built up before AI arrived is still doing its job. The question is how long that holds.</p>
+<p>The question worth sitting with isn&#39;t whether you&#39;re shipping — it&#39;s whether your team understands what it has built well enough to change it with confidence. Those are different questions, and for the last several years, the answer to the first one has been standing in for the answer to the second.</p>
+<p><img src="/images/cognitive-drain-understanding-quote.png" alt="The question worth sitting with is not &#39;are we shipping?&#39; It&#39;s &#39;do we understand what we&#39;ve built well enough to change it with confidence?&#39;"></p>
+<p>AI-assisted development makes that substitution more dangerous, because it widens the gap between output and comprehension faster than anything that came before it.</p>
+<p>The metrics will catch up eventually, and the question is whether you start measuring comprehension alongside output now, or after the first engineer surfaces from a two-week incident unable to explain why the system behaved the way it did.</p>
+<p>Naming the risk is the first step. The next two articles in this series cover what to do about it: <a href="article.html?id=what-just-happened">What Just Happened?</a> addresses the individual practices for capturing decisions before their reasoning evaporates, and <a href="article.html?id=building-the-memory-layer">Building the Memory Layer</a> covers how to scale those practices across an organization and prepare for the governance demands of autonomous agents. But you can&#39;t build those practices until you&#39;ve accepted that the drain is real, that it&#39;s already happening, and that your current measurement system isn&#39;t set up to show it to you.</p>
+<p>The pool still looks fine. That&#39;s the problem.</p>
+
+    </article>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <span class="footer-brand">Lilac Mohr</span>
+            <div class="footer-links">
+                <a href="https://www.linkedin.com/in/lilac-mohr/" target="_blank" rel="noopener">LinkedIn</a>
+                <p>&copy; 2026 All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

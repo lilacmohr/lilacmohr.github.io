@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Watermelon Problem: What Your Delivery Metrics Are Missing — Lilac Mohr</title>
+    <meta name="description" content="The project looks green. Status updates are positive, the board is moving, engineers are busy. By the time it's officially late, no one can pinpoint in the retrospective where the warning signs were — because you were measuring activity, not progress. This article covers the Watermelon Effect in software delivery, what PR data revealed that standup never surfaced (including a 31-hour average TTFR hiding behind a 1.3-hour median), how agentic AI shifts the problem from visibility to interpretability, and five practices for building real predictability into AI-assisted engineering.">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Lilac Mohr">
+    <meta property="og:title" content="The Watermelon Problem: What Your Delivery Metrics Are Missing">
+    <meta property="og:description" content="The project looks green. Status updates are positive, the board is moving, engineers are busy. By the time it's officially late, no one can pinpoint in the retrospective where the warning signs were — because you were measuring activity, not progress. This article covers the Watermelon Effect in software delivery, what PR data revealed that standup never surfaced (including a 31-hour average TTFR hiding behind a 1.3-hour median), how agentic AI shifts the problem from visibility to interpretability, and five practices for building real predictability into AI-assisted engineering.">
+    <meta property="og:url" content="https://lilacmohr.github.io/articles/watermelon-problem.html">
+    <meta property="og:image" content="https://lilacmohr.github.io/images/hero-watermelon-problem.png">
+    <meta property="article:published_time" content="2026-02-01">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="The Watermelon Problem: What Your Delivery Metrics Are Missing">
+    <meta name="twitter:description" content="The project looks green. Status updates are positive, the board is moving, engineers are busy. By the time it's officially late, no one can pinpoint in the retrospective where the warning signs were — because you were measuring activity, not progress. This article covers the Watermelon Effect in software delivery, what PR data revealed that standup never surfaced (including a 31-hour average TTFR hiding behind a 1.3-hour median), how agentic AI shifts the problem from visibility to interpretability, and five practices for building real predictability into AI-assisted engineering.">
+    <meta name="twitter:image" content="https://lilacmohr.github.io/images/hero-watermelon-problem.png">
+
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="/index.html" class="logo">Lilac Mohr</a>
+            <div class="nav-links">
+                <a href="/index.html">Home</a>
+                <a href="/category.html?cat=implementation">AI Implementation</a>
+                <a href="/category.html?cat=measurement-strategy">Measurement &amp; Strategy</a>
+                <a href="/category.html?cat=culture">Culture</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Article Header -->
+    <header class="article-header">
+        <div class="article-header-inner">
+            <p class="article-breadcrumb"><a href="/index.html">← All Articles</a></p>
+            <h1 class="article-page-title">The Watermelon Problem: What Your Delivery Metrics Are Missing</h1>
+            <div class="article-page-meta">
+                <span>Measurement &amp; Strategy</span>
+                <span>February 1, 2026</span>
+                <span>15 min read</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Article Hero Image -->
+    <div class="article-hero-image" id="article-hero-image">
+        <img src="/images/hero-watermelon-problem.png" alt="The Watermelon Problem: What Your Delivery Metrics Are Missing">
+    </div>
+
+    <!-- Article Body -->
+    <article class="article-body">
+        <h1>The Watermelon Problem: What Your Delivery Metrics Are Missing</h1>
+<p>I&#39;ve been in two situations where the project ended without warning: once when a product was canceled after eight months with nothing shipped, and once when I came back from lunch to find the lights off and a final paycheck waiting. Both times, code was being written, velocity looked normal, and the managers were still saying we were on track. The collapse was a complete surprise and left me shaken.</p>
+<p>From those experiences, I developed a reflexive suspicion of anything that smells like a waterfall project - &quot;agile in name only,&quot; I&#39;m looking at you - and an interest that extended well beyond coding into every aspect of software delivery. I wanted to understand why good teams with good intentions so often end up somewhere they didn&#39;t expect.</p>
+<p>I&#39;ve come to believe that most of the damage happens in the dark, in the parts of the delivery process nobody&#39;s measuring. And with agentic AI in the picture, some of what used to be visible is getting harder to interpret.</p>
+<hr>
+<h2>The Streetlight Effect</h2>
+<p>You may already be familiar with the cognitive problem of the Streetlight Effect. A man is searching for his keys under a streetlight, not because that&#39;s where he dropped them, but because the light is there and it&#39;s easier to search where you can see. It describes an observational bias we see in data science as well: we measure what&#39;s easy, then look for solutions in the areas that are well lit.</p>
+<p>Where is the light in the software delivery space?</p>
+<p>The last decade of agile, lean, and DevOps practices moved the industry in the right direction. We have more light than we used to:</p>
+<ul>
+<li><strong>Flow visibility</strong> — Kanban boards and WIP limits make work-in-progress legible, so teams aren&#39;t working on ten things at once.</li>
+<li><strong>Delivery cadence</strong> — Sprint velocity and burn-down charts give teams a rhythm and a rough gauge of throughput.</li>
+<li><strong>Deployment pipeline</strong> — The four key metrics from <em>Accelerate</em> (deployment frequency, lead time for changes, change failure rate, and time to restore) gave engineering leaders a shared vocabulary for measuring DevOps maturity.</li>
+</ul>
+<p>These are genuinely useful, and for many teams, getting them in place was hard-won progress. But they share a common limitation: they measure specific segments of the value stream well, and leave the rest in the dark.</p>
+<hr>
+<h2>The Watermelon Effect</h2>
+<p>When teams measure only what&#39;s easy, the result is the Watermelon Effect.</p>
+<p>The project looks green on the outside. The team appears confident - status updates are positive, the board is moving, engineers are busy. When the committed delivery date passes, the color shifts to yellow: it&#39;s &quot;almost there,&quot; just a few loose ends to tie up. Then yellow quietly becomes a new normal. Weeks stretch into months. By the time the project is officially late — sometimes very late — no one can pinpoint in the retrospective where the warning signs were. That&#39;s the defining feature of a watermelon project: it looks green long after the inside has turned red. The metrics you had were measuring activity. Nobody was measuring progress.</p>
+<p>I&#39;ve seen this play out enough times that I&#39;m now reflexively suspicious of delivery dashboards where everything looks good. Teams are usually not intentionally trying to mislead anyone. But the dashboards are built around metrics that are easy to capture. This means they reflect the parts of the process that are most visible, not necessarily the parts that matter most.</p>
+<p><img src="/images/watermelon-quote.png" alt="The project looks green on the outside. The reality, however, is that the project is red on the inside — but you just didn&#39;t have the metrics to see it."></p>
+<hr>
+<h2>Knowledge Work Is Messy By Nature</h2>
+<p>Measuring the inside of a software project is genuinely hard. Like the interior of a watermelon, it&#39;s messy in there.</p>
+<p>I love this observation from Mary and Tom Poppendieck&#39;s <em>Lean Software Development</em>: <em>&quot;development is not intended to produce repeatable results; development produces appropriate solutions to unique customer problems.&quot;</em></p>
+<p>Unlike manufacturing, which has a predictable, highly visible process, software engineering is knowledge work. It has a lot of variance. It&#39;s not a linear process but a complex network of people, tools, and interactions. Compounding the complexity, every organization has its own unique process. Even within the same company, feature teams define their own workflows, their own definitions of done, their own branching strategies, their own review conventions.</p>
+<p>So what do we do? Do we throw up our hands and say &quot;it&#39;s knowledge work, so it&#39;s unpredictable by nature&quot;?</p>
+<p>Of course not. An organization&#39;s ability to stay competitive, to grow, to stay relevant — all of it depends on delivery. Predictability isn&#39;t just a nice-to-have. It&#39;s a strategic asset.</p>
+<p>The nature of software engineering means it <em>will</em> have variation. But that doesn&#39;t mean you can&#39;t improve your process and increase predictability. You just need more light.</p>
+<hr>
+<h2>Illuminating What Actually Matters</h2>
+<p>Most teams have good visibility into code-level activity: commits, pull requests, review times, deployment frequency. What tends to remain in the dark is the end-to-end picture — how those activities connect to each other across the full value stream, and where work is actually getting stuck.</p>
+<p>The right questions are uncomfortable ones. Where are your tickets spending time? Is work piling up in a particular stage? How long does it typically sit waiting for review, and does that vary wildly from sprint to sprint? How much of a ticket&#39;s total lifetime is actually active development versus waiting for something? When teams can answer these questions with data, they stop optimizing the wrong segment of the pipeline.</p>
+<p>The practical starting point is mapping your actual value stream — not the idealized one in your team norms document, but the one your tickets actually move through. Most teams discover that the real process has more stages and more variance than they thought. And once it&#39;s visible, you can start asking which stages are predictable and which ones are chaotic, and why.</p>
+<p>The signals I&#39;ve found most revealing are:</p>
+<ul>
+<li><strong>PR cycle time</strong> — the total elapsed time from PR open to merge. High variance here is often the first sign that something is wrong; a team with consistent cycle times is a team with a legible process.</li>
+<li><strong>Time to first review</strong> — how long PRs sit unread after opening. This is almost always wait time, not active time, and it&#39;s one of the easiest bottlenecks to see once you&#39;re measuring it.</li>
+<li><strong>PR size</strong> — larger PRs take disproportionately longer to review and are more likely to sit. If your average PR is touching dozens of files, your review process is probably a bottleneck whether it looks like one or not.</li>
+<li><strong>Wait time vs. active development time</strong> — what fraction of a ticket&#39;s total lifetime is someone actually working on it, versus it sitting in a queue? Most teams are surprised by this ratio when they see it for the first time.</li>
+</ul>
+<p>The problem with these signals historically has been instrumentation. Pulling them together into something legible required either expensive tooling, a dedicated data engineering effort, or both. That&#39;s changed.</p>
+<p>In early 2026 I built a PR analysis dashboard that tracks cycle time, time to first review, PR size, risk indicators, and collaboration patterns across our repositories. The whole thing — data ingestion, analysis pipeline, and dashboard UI — came together in a couple of days, with AI agents doing the majority of the implementation work. I defined what I wanted to see, reviewed the architecture, and cleaned up edge cases. The agents wrote the rest.</p>
+<p>The point isn&#39;t that I built something clever. It&#39;s that the barrier to building your own visibility tooling has dropped dramatically. A dashboard that would have taken months of data engineering effort two years ago is now a realistic two-day project for an engineering leader who can describe what they want to measure.</p>
+<hr>
+<h2>What the Data Showed</h2>
+<p>The first thing that surprised me wasn&#39;t a problem - it was a gap between what I assumed was true and what was actually true.</p>
+<p>Before I ran this, I would have told you our average PR cycle time was under a day — not ideal, but decent for a globally-distributed team. The data told a different story. The median PR cycle time was 22 hours, but the average was 64 hours. The median looked healthy, but it was hiding the outliers that actually matter for delivery risk. When I looked at the distribution shape rather than the summary statistics, I saw something I hadn&#39;t noticed: a small cluster of PRs was consistently taking five to seven days, and they weren&#39;t random. They were concentrated in specific areas of the codebase. That&#39;s not a process problem, but a signal about complexity, unclear ownership, or work that needs to be broken down differently. I would have called that project &quot;green&quot; right up until it wasn&#39;t.</p>
+<p>The time-to-first-review numbers told a similar story. The median TTFR was 1.3 hours, which sounds like a responsive team. The average was 31 hours. Both numbers are true. Only one of them tells you something useful about delivery risk. Ten PRs waited over two days for a first review. Six open PRs had received no review at all. If any of those slow-TTFR PRs were on the critical path of something, there was a hidden two-day slip baked into the cycle, one that never surfaced in standup.</p>
+<p>The PR size data had a pattern I hadn&#39;t named yet. I knew we had some large PRs occasionally. What the metrics showed was that &quot;occasionally&quot; wasn&#39;t the right word. The cycle had 35 small PRs under 10 lines, 15 large PRs between 100 and 499 lines, and 3 very large PRs over 500 lines. Roughly one in four PRs was large or very large. Asked before I ran this whether my team was writing small, iterative PRs, I&#39;d have said &quot;mostly yes.&quot; The data says 25% of the time, no - and that&#39;s not a rounding error. That&#39;s a quarter of the review load carrying disproportionate risk, every cycle.</p>
+<p>The four largest PRs - 926 lines, 787 lines, 604 lines, 572 lines - aren&#39;t abstractions. You can look at that list and immediately have a different kind of conversation than &quot;we should try to write smaller PRs.&quot; The 787-line PR touched 10 files; the 926-line PR touched 4. One is sprawling across the codebase; the other is a deep vertical cut. They&#39;re different problems with different solutions, and the metrics don&#39;t just tell you that something is large. They start to tell you <em>how</em>, which changes what you ask the author to do differently next time. The 926-line PR wasn&#39;t a one-off judgment call. It was evidence of a recurring habit that nobody had named yet. Once you can name it, you can have a conversation about it.</p>
+<p>The review participation data was the finding that stayed with me longest. I knew roughly who reviewed what, the way any manager knows — through observation and Slack. What I didn&#39;t know was that the review graph had a quiet dependency problem. The comment-depth numbers told the story: 128 total comments across 255 reviews. That&#39;s 0.5 comments per review. More than half of all reviews produced no written comment at all. Of the comments that did exist, 44 were short, 73 were medium, and 11 were long. Reviews where someone actually wrote a substantive thought represented 4% of all reviews. You could describe a review culture as &quot;active&quot; and be technically accurate while completely missing that 96% of those reviews left no substantial feedback. A disproportionate share of substantive reviews were coming from one or two people. The others were approving, but the comment data showed most of those approvals had nothing behind them. If either of those two reviewers goes on vacation or leaves, the review process doesn&#39;t slow down — it collapses.</p>
+<p>One more number: four PRs closed without merging in a single cycle. That&#39;s not a lot in isolation. But if each one represents even half a day of engineering work, that&#39;s two-plus engineer-days that produced nothing and showed up nowhere in velocity metrics. More importantly, there was no record of why they were abandoned. Were the requirements unclear? Did someone discover a technical dead end? The number alone isn&#39;t the signal, but the absence of an explanation is.</p>
+<h3>What This Means for Delivery Confidence</h3>
+<p>Before I had these metrics, my sense of whether a project was on track was assembled from signals like standup updates, Slack tone, how often someone was asking for help. Those signals are real, but they lag. By the time you feel a project going sideways, you&#39;re already behind.</p>
+<p>What the PR data gives you is a leading indicator layer. Cycle time trending upward mid-sprint, before anyone has said anything in standup? Worth a conversation. TTFR on a critical-path feature still sitting at 18 hours on day three? That&#39;s a flag. A cluster of large PRs queued at the same time? That&#39;s a review bottleneck about to form.</p>
+<p>None of these are alarms. They&#39;re questions - the kind that let you have a calm, curious conversation on Tuesday instead of a stressful escalation on Friday. The goal isn&#39;t to catch people doing something wrong. The goal is to see around corners that the &quot;everything is fine&quot; reporting structure doesn&#39;t let you see around.</p>
+<p>The honest version of &quot;this project will be delivered on X date&quot; requires knowing not just whether tickets are moving, but whether the work is moving cleanly — small, reviewable, getting real feedback, merging without drama. PR metrics don&#39;t give you certainty. They give you a much better foundation for the confidence you&#39;re already expected to project.</p>
+<p>Every one of these data points was sitting in my Git history the whole time. None of it required new tooling to generate — just the decision to look. The question isn&#39;t whether your team has these patterns. Every team does. The question is whether you&#39;re the engineering leader who knows what yours are.</p>
+<p><img src="/images/value-stream-in-the-dark.png" alt="The Value Stream in the Dark: some stages well lit, others in shadow"></p>
+<hr>
+<h2>How Agentic AI Changes the Predictability Discussion</h2>
+<p>Everything in that data section was possible for one reason: engineers leave traces. Commits, pull requests, review comments, and closed-without-merge events all land in Github, where it sits waiting to be analyzed. The visibility problem was never a data availability problem, but an instrumentation problem. You had the evidence. You just hadn&#39;t looked at it.</p>
+<p>Agentic AI is quietly changing that assumption - not by eliminating the traces, but by changing what they tell you. The PR still lands in Git. Cycle time is still measurable. PR size, TTFR, review comment depth: all of it is still there. What disappears is the layer underneath: the reasoning that produced the output.</p>
+<p>For years, the challenge was getting visibility into a process that was complex but at least human-paced. Engineers wrote code, opened pull requests, and participated in reviews. The traces were legible because the process that created them was legible.</p>
+<p>When AI agents are doing meaningful portions of the implementation work, a significant amount of reasoning and decision-making happens inside sessions that close without a record. The engineer opened an agent session, described a problem, iterated through a few approaches, and arrived at a solution. The code got committed. But the decisions that shaped that code — why one approach was chosen over another, what constraints were in play, what was tried and abandoned — evaporated when the session ended. Building explicit infrastructure to capture that reasoning before it disappears is something I&#39;ve written about separately; see <a href="article.html?id=building-the-memory-layer">Building the Memory Layer</a>.</p>
+<p>The same 926-line PR means something different depending on whether it came from three days of deliberate human engineering or a 45-minute agent session you can no longer reconstruct. The signal is the same. Its interpretive value is not. That&#39;s the new dark space.</p>
+<p>There&#39;s also a subtler effect on predictability. With human-written code, the pace of the work is relatively legible. You can look at a developer&#39;s activity and get a rough sense of where they are and what they&#39;re working through. With agentic tools, a single session can produce the output of days of manual work in hours. Progress becomes less gradual and more episodic with long periods of relative quiet followed by a large commit. That episodic pattern makes standard progress tracking less reliable.</p>
+<p>The predictability conversation is shifting from <em>how long will this take</em> to <em>what exactly happened and why</em> — and that&#39;s a harder question to answer.</p>
+<p><img src="/images/ai-trace-quote.png" alt="Agentic AI doesn&#39;t just change how fast work happens. It changes how much of that work is interpretable."></p>
+<hr>
+<h2>Building Predictability Into AI-Assisted Delivery</h2>
+<p>Building visibility into your value stream is only half the problem. The other half is what you do with AI-assisted work once it starts moving fast. Here&#39;s where I&#39;d focus.</p>
+<p><strong>Define acceptance criteria before the agent runs, not after.</strong></p>
+<p>This is the delivery equivalent of knowing what you&#39;re looking for before you look. If you&#39;re sending an agent into a task without clear, testable success criteria, the review becomes a judgment call made under time pressure - and judgment calls under time pressure are how watermelon projects stay green longer than they should. Write down what &quot;done&quot; looks like before you prompt. Not a paragraph of intent but specific, checkable outcomes. What tests should pass? What behavior should change? What patterns should this code follow? The specification work is where predictability is either built or lost.</p>
+<p><strong>Size tasks for observability, not just velocity.</strong></p>
+<p>Large, loosely scoped tasks are risky in human-paced development. They&#39;re more dangerous with AI agents because the output is harder to evaluate in bulk. A commit that touches twenty files, generated by an agent working from a vague specification, puts the reviewer in an impossible position. Tightly scoped tasks produce outputs that are small enough to actually verify. Work that can be checked quickly and confidently is work that can move predictably.</p>
+<p><strong>Treat decision capture as part of the task, not documentation work.</strong></p>
+<p>The reasoning that shapes an AI-assisted implementation doesn&#39;t persist automatically. Building a lightweight habit of capturing why a key decision was made (before the session closes) preserves the knowledge that would otherwise evaporate. This doesn&#39;t need to be an Architecture Decision Record (ADR) or a long comment. A sentence in the PR description explaining the tradeoff is often enough. The goal is that the next person who touches this code — or the next incident postmortem — has access to the reasoning, not just the result.</p>
+<p><strong>Make the AI work visible in your process.</strong></p>
+<p>If your team is using agents for meaningful portions of implementation, that should be visible somewhere in your process. It doesn&#39;t have to be elaborate. Adding a note to your ticket when a task is significantly AI-assisted, or tagging the PR, gives you the traceability to go back and understand where rework is accumulating and why. Over time, that signal tells you which parts of your value stream are benefiting most from AI assistance and which are actually getting less predictable because the work is moving faster than your review process can absorb.</p>
+<p><strong>Instrument before you optimize.</strong></p>
+<p>The temptation with agentic tools is to focus on throughput: more tickets closed, faster cycle times, and higher commit frequency. All of those numbers can go up while the inside of the watermelon gets redder. The metrics to watch are the ones that reflect quality and comprehension: defect escape rate, rework frequency, and how long postmortems take to get to a root cause. If those are stable or improving as throughput increases, you&#39;re building real predictability. If they&#39;re quietly degrading, your delivery dashboard is showing you the outside of the watermelon.</p>
+<p>None of these practices take root without a leader who&#39;s actively asking for them. Engineers don&#39;t spontaneously start capturing decision rationale or tagging AI-assisted work. They do it when they understand it matters, and they understand it matters when the people above them are looking at that data and acting on it. Creating the conditions for visibility is itself a leadership act.</p>
+<hr>
+<h2>You Still Need More Light</h2>
+<p>Software delivery has always been harder to see than it looks. The variance is real, the complexity is real, and the organizational dynamics that keep bad news from reaching the people who need it are very human and very persistent.</p>
+<p>But none of that means predictability is out of reach. It means you have to be deliberate about where you put the light — in the parts of the process that are easy to measure <em>and</em> in the parts that matter. The teams I&#39;ve seen break out of the watermelon cycle aren&#39;t the ones running the most sophisticated tools or the most comprehensive dashboards. They&#39;re the ones who got honest about what they didn&#39;t know, and went looking in the dark.</p>
+<p>Agentic AI raises the stakes on that habit. The tools are more powerful, the output is faster, and the parts of the process that are easiest to overlook are getting harder to see. But those same tools are also what made it possible for me to build a delivery visibility dashboard in two days that would have taken months before. The leaders who figure out how to use AI to illuminate the dark spaces — not just to write code faster, but to make their own delivery process legible — are the ones who will actually ship better software. Not just more of it.</p>
+<p>You just need more light.</p>
+<p><img src="/images/break-watermelon-cycle-quote.png" alt="The teams who break out of the watermelon cycle aren&#39;t the ones with the best dashboards. They&#39;re the ones who got honest about what they didn&#39;t know, and went looking in the dark."></p>
+<hr>
+<p><em>Related reading: <a href="article.html?id=cognitive-drain-problem">Cognitive Drain: The Silent Risk of AI-Assisted Development</a> · <a href="article.html?id=your-ai-metrics-are-lying-to-you">Your AI Metrics Are Lying to You</a></em></p>
+
+    </article>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <span class="footer-brand">Lilac Mohr</span>
+            <div class="footer-links">
+                <a href="https://www.linkedin.com/in/lilac-mohr/" target="_blank" rel="noopener">LinkedIn</a>
+                <p>&copy; 2026 All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
