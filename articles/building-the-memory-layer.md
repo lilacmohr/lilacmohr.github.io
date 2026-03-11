@@ -1,12 +1,12 @@
 # Building the Memory Layer: Scaling Decision Capture Across Your Organization
 
-*Part three of a three-part series. Part one: [Cognitive Drain: The Silent Risk of AI-Assisted Development](article.html?id=cognitive-drain-problem). Part two: [What Just Happened? Capturing Engineering Decisions in the Age of AI](article.html?id=what-just-happened).*
+*Part three of a three-part series. Part one: [Cognitive Drain: The Silent Risk of AI-Assisted Development](cognitive-drain-problem.html). Part two: [What Just Happened? Capturing Engineering Decisions in the Age of AI](what-just-happened.html).*
 
 When a principal engineer on my team (let's call him Bill) announced he was leaving, I understood immediately what we were about to lose. Not the code - we had the code. Not the documentation - we had some of that too. What we were losing was the reasoning behind the decisions: why the service boundary was drawn where it was, which integration assumptions had quietly become load-bearing, what had been tried before the current architecture and failed. We scheduled (and recorded) brain-dump sessions, but knew that the day would come when we would run into a system issue or a new architecture proposal and would collectively say "if only Bill were here..."
 
 Two years later, a new engineer asked why a particular architectural constraint existed in the first place, and nobody could answer. The recordings were in a shared drive somewhere, describing a system that had continued evolving without them. The knowledge transfer worked, but the knowledge just had nowhere to land that kept it alive.
 
-In [Part one of this series](article.html?id=cognitive-drain-problem), we named the risk of cognitive drain. In [Part two](article.html?id=what-just-happened), we covered what to coach your team to do about it: measuring for early warning signals, a framework for what deserves a formal record, and the narration workflow - the practice of articulating decisions at the moment they're made, so the reasoning doesn't evaporate with the session - to introduce in a 1:1 this week. Those practices create artifacts. This article is about building the infrastructure that keeps them alive: where records live, who maintains them without the practice collapsing under its own weight, and what the governance model looks like when AI agents stop assisting with decisions and start making them autonomously.
+In [Part one of this series](cognitive-drain-problem.html), we named the risk of cognitive drain. In [Part two](what-just-happened.html), we covered what to coach your team to do about it: measuring for early warning signals, a framework for what deserves a formal record, and the narration workflow - the practice of articulating decisions at the moment they're made, so the reasoning doesn't evaporate with the session - to introduce in a 1:1 this week. Those practices create artifacts. This article is about building the infrastructure that keeps them alive: where records live, who maintains them without the practice collapsing under its own weight, and what the governance model looks like when AI agents stop assisting with decisions and start making them autonomously.
 
 ---
 
@@ -112,7 +112,7 @@ The narration workflow helps with the third problem because it produces value im
 
 ## When the Agent is Making the Decisions
 
-The narration workflow described in [Part two](article.html?id=what-just-happened) assumes a human who participated in a decision and needs to articulate it. That assumption is already weakening. As AI agents become more capable and organizations extend more autonomy to them - fewer human approval gateways, longer autonomous task chains, architectural changes made or proposed by agents rather than reviewed and guided by engineers at each step - the human may not be present for the decision at all.
+The narration workflow described in [Part two](what-just-happened.html) assumes a human who participated in a decision and needs to articulate it. That assumption is already weakening. As AI agents become more capable and organizations extend more autonomy to them - fewer human approval gateways, longer autonomous task chains, architectural changes made or proposed by agents rather than reviewed and guided by engineers at each step - the human may not be present for the decision at all.
 
 This is where we're heading, and it's moving quickly enough that the infrastructure choices you make now will determine whether you can govern it. The decision record corpus you've been building - narration-sourced, versioned in your repository, queryable through semantic search - is exactly the memory layer that determines whether autonomous agents can operate with accumulated architectural context or without it. Agents with access to that corpus can ground their decisions in prior human reasoning. Agents without it are working from code alone, blind to the constraints and trade-offs that shaped the system they're modifying.
 
@@ -159,14 +159,14 @@ Here's what to do next.
 
 **Engineering leaders:**
 - Introduce the keeper → steward conversation with your Staff+ engineers this week. Use the coaching language in this article. It's a 1:1 conversation, not a policy rollout.
-- Define the three decision levels with your Staff engineers (introduced in [Part two](article.html?id=what-just-happened)) and agree on what requires a formal record versus what lives in the PR. Clarity here is what makes the practice sustainable.
+- Define the three decision levels with your Staff engineers (introduced in [Part two](what-just-happened.html)) and agree on what requires a formal record versus what lives in the PR. Clarity here is what makes the practice sustainable.
 - Set the PR checklist expectation for Level 1 and Level 2 decisions: a decision record accompanies or precedes the merge.
 - Start reading incident postmortems as comprehension signals, not just incident reports. How long does it take the team to form accurate hypotheses? That's your cognitive drain baseline.
 - Start with what costs nothing: a `/decisions` folder, a naming convention, and a PR checklist requirement. Build toward automated update suggestions when you have a Staff+ engineer who can own the workflow. Invest in semantic search when the record base is large enough to benefit from it.
 - When evaluating AI tooling: ask whether the system surfaces agent decision reasoning in a reviewable form, and whether it can query an external knowledge base before proposing architectural changes. Add these to your evaluation criteria now, before autonomy increases.
 
 **Staff+ engineers:**
-- Identify the Level 1 contracts in your domain (the highest-impact service boundaries and architectural decisions, as defined in [Part two](article.html?id=what-just-happened)). If they don't have records, write them first - that's the immediate gap to close.
+- Identify the Level 1 contracts in your domain (the highest-impact service boundaries and architectural decisions, as defined in [Part two](what-just-happened.html)). If they don't have records, write them first - that's the immediate gap to close.
 - Run one pre-mortem with your team before your next major project kicks off. Use it to surface what isn't documented yet.
 - The next time you make a Level 2 decision (a significant design choice with cross-team impact), use the narration workflow before merging. Treat it as a reference implementation for your team.
 - Own the quality of the decision record corpus in your domain. When an agent proposes a change that touches your service's contracts, your job is to evaluate the reasoning behind the proposal, not just the code it produced.

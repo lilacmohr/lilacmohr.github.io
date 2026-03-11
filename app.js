@@ -1,3 +1,12 @@
+// Set canonical URL to always point to lilacmohr.com, preventing duplicate-content
+// confusion when the same site is served from lilacmohr.github.io.
+(function () {
+    const canonical = document.getElementById('canonical-url');
+    if (canonical) {
+        canonical.href = 'https://lilacmohr.com' + window.location.pathname + window.location.search;
+    }
+}());
+
 // Main application logic
 class ArticleManager {
     constructor() {

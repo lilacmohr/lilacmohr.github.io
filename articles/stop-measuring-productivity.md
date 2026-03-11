@@ -101,7 +101,7 @@ There's a principle I come back to often when working with leaders who are new t
 
 The critical thing is what you do with these metrics. They are not for assigning blame or for performance management in the punitive sense. They're for starting conversations about things that intuition alone often misses. Bring a pattern to a one-on-one: "I noticed PRs have been sitting longer this month - tell me more about what's going on that might have changed." More often than not, the engineer already knows exactly why.
 
-This challenge has sharpened considerably in the AI era. When teams adopt AI coding tools, the natural instinct is to start measuring AI. The most convenient proxy is acceptance rate or lines of code attributed to AI. Those metrics have the same problem as any other single-dimension measurement: they illuminate where you're looking, not where the keys actually are. I wrote more about this pattern in [Your AI Metrics Are Lying to You](article.html?id=your-ai-metrics-are-lying-to-you).
+This challenge has sharpened considerably in the AI era. When teams adopt AI coding tools, the natural instinct is to start measuring AI. The most convenient proxy is acceptance rate or lines of code attributed to AI. Those metrics have the same problem as any other single-dimension measurement: they illuminate where you're looking, not where the keys actually are. I wrote more about this pattern in [Your AI Metrics Are Lying to You](your-ai-metrics-are-lying-to-you.html).
 
 ---
 
@@ -173,7 +173,7 @@ What I've observed is that the teams navigating this best are, predictably, the 
 
 Conversely, teams where trust is low tend to adopt AI tools in ways that make the understanding problem worse. Engineers use AI to move faster and hide the fact that they don't fully understand the output - because admitting confusion feels risky. The tools become cover rather than force multipliers. This is exactly the kind of dynamic that doesn't appear in acceptance rate metrics or lines-of-code attributions.
 
-You can't address cognitive drain on a team that doesn't trust its leaders. You can't implement decision-capture practices on a team that's too burned out to slow down. The foundations come first. I've explored what this looks like in practice starting with [Cognitive Drain: The Silent Risk of AI-Assisted Development](article.html?id=cognitive-drain-problem).
+You can't address cognitive drain on a team that doesn't trust its leaders. You can't implement decision-capture practices on a team that's too burned out to slow down. The foundations come first. I've explored what this looks like in practice starting with [Cognitive Drain: The Silent Risk of AI-Assisted Development](cognitive-drain-problem.html).
 
 ---
 
