@@ -115,7 +115,7 @@ Agentic AI is quietly changing that assumption - not by eliminating the traces, 
 
 For years, the challenge was getting visibility into a process that was complex but at least human-paced. Engineers wrote code, opened pull requests, and participated in reviews. The traces were legible because the process that created them was legible.
 
-When AI agents are doing meaningful portions of the implementation work, a significant amount of reasoning and decision-making happens inside sessions that close without a record. The engineer opened an agent session, described a problem, iterated through a few approaches, and arrived at a solution. The code got committed. But the decisions that shaped that code — why one approach was chosen over another, what constraints were in play, what was tried and abandoned — evaporated when the session ended. Building explicit infrastructure to capture that reasoning before it disappears is something I've written about separately; see [Building the Memory Layer](building-the-memory-layer.html).
+When AI agents are doing meaningful portions of the implementation work, a significant amount of reasoning and decision-making happens inside sessions that close without a record. The engineer opened an agent session, described a problem, iterated through a few approaches, and arrived at a solution. The code got committed. But the decisions that shaped that code — why one approach was chosen over another, what constraints were in play, what was tried and abandoned — evaporated when the session ended. Building explicit infrastructure to capture that reasoning before it disappears is something I've written about separately; see [Building the Memory Layer](/articles/building-the-memory-layer.html).
 
 The same 926-line PR means something different depending on whether it came from three days of deliberate human engineering or a 45-minute agent session you can no longer reconstruct. The signal is the same. Its interpretive value is not. That's the new dark space.
 
@@ -169,4 +169,4 @@ You just need more light.
 
 ---
 
-*Related reading: [Cognitive Drain: The Silent Risk of AI-Assisted Development](cognitive-drain-problem.html) · [Your AI Metrics Are Lying to You](your-ai-metrics-are-lying-to-you.html)*
+*Related reading: [Cognitive Drain: The Silent Risk of AI-Assisted Development](/articles/cognitive-drain-problem.html) · [Your AI Metrics Are Lying to You](/articles/your-ai-metrics-are-lying-to-you.html)*

@@ -1,6 +1,6 @@
 # Cognitive Drain: The Silent Risk of AI-Assisted Development
 
-*Part one of a three-part series. Part two: [What Just Happened? Capturing Engineering Decisions in the Age of AI](what-just-happened.html). Part three: [Building the Memory Layer: Scaling Decision Capture Across Your Organization](building-the-memory-layer.html).*
+*Part one of a three-part series. Part two: [What Just Happened? Capturing Engineering Decisions in the Age of AI](/articles/what-just-happened.html). Part three: [Building the Memory Layer: Scaling Decision Capture Across Your Organization](/articles/building-the-memory-layer.html).*
 
 An engineer told me recently: "I enjoy working with a coding agent, but after a while I feel like I don't know my own code anymore... and that scares me."
 
@@ -88,6 +88,6 @@ AI-assisted development makes that substitution more dangerous, because it widen
 
 The metrics will catch up eventually, and the question is whether you start measuring comprehension alongside output now, or after the first engineer surfaces from a two-week incident unable to explain why the system behaved the way it did.
 
-Naming the risk is the first step. The next two articles in this series cover what to do about it: [What Just Happened?](what-just-happened.html) addresses the individual practices for capturing decisions before their reasoning evaporates, and [Building the Memory Layer](building-the-memory-layer.html) covers how to scale those practices across an organization and prepare for the governance demands of autonomous agents. But you can't build those practices until you've accepted that the drain is real, that it's already happening, and that your current measurement system isn't set up to show it to you.
+Naming the risk is the first step. The next two articles in this series cover what to do about it: [What Just Happened?](/articles/what-just-happened.html) addresses the individual practices for capturing decisions before their reasoning evaporates, and [Building the Memory Layer](/articles/building-the-memory-layer.html) covers how to scale those practices across an organization and prepare for the governance demands of autonomous agents. But you can't build those practices until you've accepted that the drain is real, that it's already happening, and that your current measurement system isn't set up to show it to you.
 
 The pool still looks fine. That's the problem.
