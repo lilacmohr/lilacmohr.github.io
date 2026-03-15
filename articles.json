@@ -1,11 +1,21 @@
 {
   "articles": [
-     {
+    {
+      "id": "you-just-promoted-every-engineer",
+      "title": "You Just Promoted Every Engineer on Your Team",
+      "category": "culture",
+      "date": "2026-03-14",
+      "displayOrder": 10,
+      "preview": "Your engineers didn't get new titles or a raise. They got AI agents - and a fundamentally different job that nobody announced. This article covers three things: what actually changed about being an engineer, how to coach people through an identity shift they didn't sign up for, and how to build the operational infrastructure - specs, decision logs, verification layers, and observability - that makes increasing agent autonomy responsible rather than reckless.",
+      "image": "images/hero-you-just-promoted-every-engineer.png",
+      "readTime": "27 min read"
+    },
+    {
       "id": "cognitive-drain-problem",
       "title": "Cognitive Drain: The Silent Risk of AI-Assisted Development",
       "category": "implementation",
       "date": "2026-03-04",
-      "displayOrder": 1,
+      "displayOrder": 20,
       "preview": "An engineer told me: 'I enjoy working with a coding agent, but after a while I feel like I don't know my own code anymore.' This article names the pattern as cognitive drain: teams ship faster while understanding forms more slowly, decision rationale goes uncaptured, and confidence in changing core systems erodes long before traditional delivery metrics show trouble.",
       "image": "images/hero-cognitive-drain-problem.png",
       "readTime": "13 min read"
@@ -15,7 +25,7 @@
       "title": "What Just Happened? Capturing Engineering Decisions in the Age of AI",
       "category": "implementation",
       "date": "2026-03-05",
-      "displayOrder": 2,
+      "displayOrder": 30,
       "preview": "After a long AI-assisted coding session, the feeling is familiar: what just happened? This article turns that moment into practice with early warning signals you can read from existing artifacts, a three-level framework for what belongs in a decision record, and a narration workflow teams can use this sprint before reasoning evaporates.",
       "image": "images/hero-what-just-happened.png",
       "readTime": "18 min read"
@@ -25,7 +35,7 @@
       "title": "Building the Memory Layer: Scaling Decision Capture Across Your Organization",
       "category": "implementation",
       "date": "2026-03-06",
-      "displayOrder": 3,
+      "displayOrder": 40,
       "preview": "A principal engineer leaves, the recordings exist, and two years later no one can explain why key architectural constraints were chosen. This article covers the infrastructure layer: how Staff+ engineers shift from keeper to steward, how decision records live in the repo and stay current through workflow automation, and how to govern autonomous agents with decision review instead of code review alone.",
       "image": "images/hero-building-the-memory-layer.png",
       "readTime": "17 min read"
@@ -35,7 +45,7 @@
       "title": "Stop Measuring Productivity. Start Building the Conditions for It.",
       "category": "culture",
       "date": "2026-02-25",
-      "displayOrder": 4,
+      "displayOrder": 50,
       "preview": "When someone asks me about engineering productivity, the first thing I do is push back on the word. What actually drives great engineering isn't throughput — it's the conditions: trust, belonging, a team that genuinely likes working together. This article covers what those conditions look like in practice, how to rebuild them when things are already broken, how to use metrics to prompt conversations instead of assign blame, and why the same foundations determine whether AI adoption helps or backfires.",
       "image": "images/hero-stop-measuring-productivity.png",
       "readTime": "18 min read"
@@ -45,7 +55,7 @@
       "title": "Your AI Metrics Are Lying to You",
       "category": "measurement-strategy",
       "date": "2026-02-15",
-      "displayOrder": 5,
+      "displayOrder": 60,
       "preview": "A VP announced AI had written 67% of the code. The underlying metric was autocomplete acceptance, while real delivery and quality metrics were flat. This article separates AI suggestions, AI-assisted coding, and autonomous output so leaders can stop mistaking activity for impact and invest against the right signals.",
       "image": "images/hero-your-ai-metrics-are-lying-to-you.png",
       "readTime": "12 min read"
@@ -55,7 +65,7 @@
       "title": "The Watermelon Problem: What Your Delivery Metrics Are Missing",
       "category": "measurement-strategy",
       "date": "2026-02-01",
-      "displayOrder": 6,
+      "displayOrder": 70,
       "preview": "The project looks green. Status updates are positive, the board is moving, engineers are busy. By the time it's officially late, no one can pinpoint in the retrospective where the warning signs were — because you were measuring activity, not progress. This article covers the Watermelon Effect in software delivery, what PR data revealed that standup never surfaced (including a 31-hour average TTFR hiding behind a 1.3-hour median), how agentic AI shifts the problem from visibility to interpretability, and five practices for building real predictability into AI-assisted engineering.",
       "image": "images/hero-watermelon-problem.png",
       "readTime": "15 min read"
@@ -65,7 +75,7 @@
       "title": "Mothers Eat Last: Five Leadership Lessons from Motherhood",
       "category": "culture",
       "date": "2022-05-07",
-      "displayOrder": 7,
+      "displayOrder": 80,
       "preview": "Motherhood has prepared me for leadership in ways that rival any book, podcast, or conference. In this piece I share five lessons from nearly thirteen years of parenting that shaped how I lead teams — from servant leadership and staying calm under pressure, to the kind of genuine care that turns a group of people into a family.",
       "image": "images/hero-mothers-eat-last.png",
       "readTime": "7 min read"
