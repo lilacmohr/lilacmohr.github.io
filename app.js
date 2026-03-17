@@ -212,17 +212,31 @@ class ArticleManager {
         const filtered = this.articles.filter(a => a.category === category);
         container.innerHTML = filtered.map(article => this.createArticleCard(article)).join('');
 
+        const categoryNames = {
+            'implementation': 'AI Implementation',
+            'measurement-strategy': 'Measurement & Strategy',
+            'strategy-culture': 'Strategy & Culture',
+            'case-studies': 'Case Studies & Tools',
+            'culture': 'Culture & Leadership'
+        };
+        const categoryDescriptions = {
+            'implementation': 'Practical strategies for deploying AI tools, building reliable workflows, and embedding AI engineering into your team\'s day-to-day work.',
+            'measurement-strategy': 'How to measure what matters with AI: from meaningful metrics and productivity benchmarks to building a coherent AI strategy for engineering organizations.',
+            'culture': 'How AI is reshaping engineering culture, team identity, and leadership — and what it takes to help your people adapt.'
+        };
+
         // Update category title
         const titleElement = document.getElementById('category-title');
         if (titleElement) {
-            const categoryNames = {
-                'implementation': 'AI Implementation',
-                'measurement-strategy': 'Measurement & Strategy',
-                'strategy-culture': 'Strategy & Culture',
-                'case-studies': 'Case Studies & Tools',
-                'culture': 'Culture & Leadership'
-            };
             titleElement.textContent = categoryNames[category] || category;
+        }
+
+        // Update page title and meta description
+        const displayName = categoryNames[category] || category;
+        document.title = `${displayName} — Lilac Mohr`;
+        const descTag = document.getElementById('page-description');
+        if (descTag && categoryDescriptions[category]) {
+            descTag.content = categoryDescriptions[category];
         }
 
         // Setup side-scrolling navigation
