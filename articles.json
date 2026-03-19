@@ -1,6 +1,16 @@
 {
   "articles": [
     {
+      "id": "tech-skills-as-virtual-goods",
+      "title": "Tech Skills as Virtual Goods",
+      "category": "culture",
+      "date": "2026-03-18",
+      "displayOrder": 85,
+      "preview": "When my kids ran in waving twenty dollar bills from Oma's garden, they had one plan: V-Bucks and Robux. My attempt to convince them that vocabulary words and tech skills were the real virtual goods went about as well as you'd expect. Five years later, watching my youngest vibe-code browser games with an AI assistant, I think Ms. Saunders would have had something to say about all of it.",
+      "image": "images/hero-tech-skills-as-virtual-goods.png",
+      "readTime": "9 min read"
+    },
+    {
       "id": "you-just-promoted-every-engineer",
       "title": "You Just Promoted Every Engineer on Your Team",
       "category": "culture",
