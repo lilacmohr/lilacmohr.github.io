@@ -37,7 +37,7 @@ Across 14 sessions and 470 interaction segments, here's what my dashboard surfac
 
 *A note on terms: **queue time** is the total elapsed time for a segment - AI processing plus any waiting after the agent responded, including approval waits. A **blocked** segment is one where the agent had finished and was waiting on a manual approval, or had been idle for more than a minute. **Productive time** is active session time minus time spent in iteration chains (repeated attempts at the same task). **Context switch gap** is the elapsed time between consecutive segments.*
 
-<img src="images/ai-coaching-session-summary.png" alt="A single session summary card showing 18.3h duration, 16.9h active, 33 segments, 30% resolution, 22 files, 297 operations" class="screenshot" />
+<img src="/images/ai-coaching-session-summary.png" alt="A single session summary card showing 18.3h duration, 16.9h active, 33 segments, 30% resolution, 22 files, 297 operations" class="screenshot" />
 *One session, summarized. 18 hours elapsed, 297 agent operations, 30% resolution.*
 
 - **Average queue time: 7.3 minutes per segment**
