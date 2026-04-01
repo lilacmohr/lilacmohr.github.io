@@ -54,13 +54,8 @@ class ArticleManager {
         const featuredContainer = document.getElementById('featured-articles');
         const articlesContainer = document.getElementById('articles-grid');
         
-        if (featuredSection && featuredContainer) {
-            if (this.articles.length >= 10) {
-                featuredSection.style.display = '';
-                this.renderFeaturedArticles();
-            } else {
+if (featuredSection) {
                 featuredSection.style.display = 'none';
-            }
         }
         
         if (articlesContainer) {

@@ -2,23 +2,31 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://lilacmohr.com/</loc>
-    <lastmod>2026-03-19</lastmod>
+    <lastmod>2026-04-01</lastmod>
   </url>
   <url>
     <loc>https://lilacmohr.com/category.html?cat=implementation</loc>
-    <lastmod>2026-03-19</lastmod>
+    <lastmod>2026-04-01</lastmod>
   </url>
   <url>
     <loc>https://lilacmohr.com/category.html?cat=measurement-strategy</loc>
-    <lastmod>2026-03-19</lastmod>
+    <lastmod>2026-04-01</lastmod>
   </url>
   <url>
     <loc>https://lilacmohr.com/category.html?cat=culture</loc>
-    <lastmod>2026-03-19</lastmod>
+    <lastmod>2026-04-01</lastmod>
+  </url>
+  <url>
+    <loc>https://lilacmohr.com/articles/the-bottleneck-isnt-the-ai.html</loc>
+    <lastmod>2026-04-01</lastmod>
   </url>
   <url>
     <loc>https://lilacmohr.com/articles/you-just-promoted-every-engineer.html</loc>
     <lastmod>2026-03-14</lastmod>
+  </url>
+  <url>
+    <loc>https://lilacmohr.com/articles/your-ai-metrics-are-lying-to-you.html</loc>
+    <lastmod>2026-02-15</lastmod>
   </url>
   <url>
     <loc>https://lilacmohr.com/articles/cognitive-drain-problem.html</loc>
@@ -33,16 +41,12 @@
     <lastmod>2026-03-06</lastmod>
   </url>
   <url>
-    <loc>https://lilacmohr.com/articles/stop-measuring-productivity.html</loc>
-    <lastmod>2026-02-25</lastmod>
-  </url>
-  <url>
-    <loc>https://lilacmohr.com/articles/your-ai-metrics-are-lying-to-you.html</loc>
-    <lastmod>2026-02-15</lastmod>
-  </url>
-  <url>
     <loc>https://lilacmohr.com/articles/watermelon-problem.html</loc>
     <lastmod>2026-02-01</lastmod>
+  </url>
+  <url>
+    <loc>https://lilacmohr.com/articles/stop-measuring-productivity.html</loc>
+    <lastmod>2026-02-25</lastmod>
   </url>
   <url>
     <loc>https://lilacmohr.com/articles/mothers-eat-last.html</loc>
