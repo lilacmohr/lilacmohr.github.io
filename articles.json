@@ -1,6 +1,16 @@
 {
   "articles": [
     {
+      "id": "nine-agents-reviewed-my-spec",
+      "title": "I Had 9 AI Agents Review My Spec. Here's What They Found That I Couldn't.",
+      "category": "implementation",
+      "date": "2026-04-15",
+      "displayOrder": 3,
+      "preview": "Nine AI reviewer personas, each with a specialized lens, ran independently against the spec for my personal project. They found a factual error about Anthropic's SDK, a library that silently produces garbage on newsletter HTML, and a pipeline ordering contradiction I'd written myself across two sections. This article covers how the multi-agent review protocol works, what each type of reviewer catches that others don't, and when the 90 minutes is worth it.",
+      "image": "images/hero-nine-agents-reviewed-my-spec.png",
+      "readTime": "11 min read"
+    },
+    {
       "id": "the-bottleneck-isnt-the-ai",
       "title": "The Bottleneck Isn't the AI: A Flow Efficiency Framework for AI-Assisted Development",
       "category": "measurement-strategy",

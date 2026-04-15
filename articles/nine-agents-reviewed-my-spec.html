@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I Had 9 AI Agents Review My Spec. Here's What They Found That I Couldn't. — Lilac Mohr</title>
+    <meta name="description" content="Nine AI reviewer personas, each with a specialized lens, ran independently against the spec for my personal project. They found a factual error about Anthropic's SDK, a library that silently produces garbage on newsletter HTML, and a pipeline ordering contradiction I'd written myself across two sections. This article covers how the multi-agent review protocol works, what each type of reviewer catches that others don't, and when the 90 minutes is worth it.">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Lilac Mohr">
+    <meta property="og:title" content="I Had 9 AI Agents Review My Spec. Here's What They Found That I Couldn't.">
+    <meta property="og:description" content="Nine AI reviewer personas, each with a specialized lens, ran independently against the spec for my personal project. They found a factual error about Anthropic's SDK, a library that silently produces garbage on newsletter HTML, and a pipeline ordering contradiction I'd written myself across two sections. This article covers how the multi-agent review protocol works, what each type of reviewer catches that others don't, and when the 90 minutes is worth it.">
+    <meta property="og:url" content="https://lilacmohr.com/articles/nine-agents-reviewed-my-spec.html">
+    <meta property="og:image" content="https://lilacmohr.com/images/hero-nine-agents-reviewed-my-spec.png">
+    <meta property="article:published_time" content="2026-04-15">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://lilacmohr.com/articles/nine-agents-reviewed-my-spec.html">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="I Had 9 AI Agents Review My Spec. Here's What They Found That I Couldn't.">
+    <meta name="twitter:description" content="Nine AI reviewer personas, each with a specialized lens, ran independently against the spec for my personal project. They found a factual error about Anthropic's SDK, a library that silently produces garbage on newsletter HTML, and a pipeline ordering contradiction I'd written myself across two sections. This article covers how the multi-agent review protocol works, what each type of reviewer catches that others don't, and when the 90 minutes is worth it.">
+    <meta name="twitter:image" content="https://lilacmohr.com/images/hero-nine-agents-reviewed-my-spec.png">
+
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="/" class="logo">Lilac Mohr</a>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="/category.html?cat=implementation">AI Implementation</a>
+                <a href="/category.html?cat=measurement-strategy">Measurement &amp; Strategy</a>
+                <a href="/category.html?cat=culture">Culture</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Article Header -->
+    <header class="article-header">
+        <div class="article-header-inner">
+            <p class="article-breadcrumb"><a href="/">← All Articles</a></p>
+            <h1 class="article-page-title">I Had 9 AI Agents Review My Spec. Here's What They Found That I Couldn't.</h1>
+            <div class="article-page-meta">
+                <span>AI Implementation</span>
+                <span>April 15, 2026</span>
+                <span>11 min read</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Article Hero Image -->
+    <div class="article-hero-image" id="article-hero-image">
+        <img src="/images/hero-nine-agents-reviewed-my-spec.png" alt="I Had 9 AI Agents Review My Spec. Here's What They Found That I Couldn't.">
+    </div>
+
+    <!-- Article Body -->
+    <article class="article-body">
+        <p><em>How a multi-agent review protocol caught a factual error, a library trap, and an architectural contradiction  -  before a single line of code was written.</em></p>
+<hr>
+<p>Every engineer I&#39;ve talked to who gets serious productivity gains from AI coding assistants says some version of the same thing: the quality of what comes out is determined almost entirely by the quality of what goes in. Not the model, not the prompts  -  the requirements.</p>
+<p>This matches what research is starting to show. Studies in 2025 and 2026 on what&#39;s being called Specification-Driven Development suggest top-performing teams have flipped the traditional effort model, spending the majority of their time on requirements and only a fraction reviewing generated code. The reason is fundamental: AI agents are hyper-literal. They don&#39;t have the intuition a human developer uses to fill gaps. When a spec is ambiguous, an agent makes a plausible assumption and proceeds  -  silently, often wrongly. By the time you find the mismatch, there&#39;s code to unwind, not just words to fix.</p>
+<p>I build these projects deliberately -- it&#39;s how I develop and pressure-test practices before recommending them to the engineering organizations I work with. I&#39;d been doing spec-driven development for my personal project, <a href="https://github.com/lilacmohr/ai-radar">ai-radar</a> - a Python pipeline that ingests AI content from Gmail newsletters, ArXiv, RSS feeds, and Hacker News, filters it for relevance using LLMs, and produces a structured daily digest. I&#39;d spent real time getting the spec right. I&#39;d had Claude question me until it was at least 90% confident we were on the same page before it drafted anything. I thought the spec was solid.</p>
+<p>Then I ran nine AI reviewer agents against it. They found things I could not have caught myself.</p>
+<hr>
+<h2>The Setup</h2>
+<p>The idea came from noticing a gap in how spec review is typically done. Open-source frameworks like GitHub&#39;s <a href="https://github.com/github/spec-kit">spec-kit</a> have pushed the conversation forward on what good requirements look like for AI-assisted development  -  but spec review itself tends to be a single pass, a single reviewer, a single lens.</p>
+<p>The problem with a single lens is the same as the problem with self-review: you read what you meant to write, not what you wrote. And different readers catch completely different things. A security reviewer notices things an architect doesn&#39;t. An operator  -  someone responsible for the system at 7am when it fails  -  sees things a developer writing in the happy path never imagines.</p>
+<p>My hypothesis: running multiple AI reviewer personas independently, each with a specialized lens, and then synthesizing their findings, would surface a qualitatively different set of issues than any single reviewer would catch.</p>
+<p>I tested it against the ai-radar spec. Here&#39;s what happened.</p>
+<hr>
+<h2>The Nine Reviewers</h2>
+<p>Each persona ran in its own Claude Code session, reading only the spec PR  -  not each other&#39;s comments. The isolation was intentional. Reviewers that see each other&#39;s comments anchor to prior findings and stop producing independent signal.</p>
+<p>The nine personas, and what each one was looking for:</p>
+<table>
+<thead>
+<tr>
+<th>Persona</th>
+<th>Lens</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>🏗️ Architect</td>
+<td>Module boundaries, interface contracts, contradictions between spec sections</td>
+</tr>
+<tr>
+<td>🔍 Skeptic</td>
+<td>Runtime failure modes, optimistic assumptions, what happens when things go wrong</td>
+</tr>
+<tr>
+<td>📦 OSS Adoptability</td>
+<td>First-install experience, missing setup steps, undocumented secrets</td>
+</tr>
+<tr>
+<td>🔒 Security</td>
+<td>Credential handling, OAuth scope, third-party data exposure</td>
+</tr>
+<tr>
+<td>✂️ MVP Scope</td>
+<td>Scope creep, over-engineering, hidden post-MVP complexity</td>
+</tr>
+<tr>
+<td>🔬 Domain Expert</td>
+<td>Library behavior, API quirks, real-world data messiness</td>
+</tr>
+<tr>
+<td>⚖️ Legal &amp; Compliance</td>
+<td>Content rights, terms of service, data retention</td>
+</tr>
+<tr>
+<td>🔧 Operator</td>
+<td>Silent failures, missing recovery procedures, what the system looks like at 7am</td>
+</tr>
+<tr>
+<td>🧪 Test Strategy</td>
+<td>Testability of acceptance criteria, mock strategies, how to verify LLM outputs</td>
+</tr>
+</tbody></table>
+<p>Each reviewer posted structured comments to the PR using a shared label taxonomy: <code>[BLOCKING]</code>, <code>[AMBIGUITY]</code>, <code>[FALSE PRECISION]</code>, <code>[SUGGESTION]</code>, <code>[NIT]</code>. A synthesis agent then read all comments, identified overlap and conflict, and produced a single prioritized action list.</p>
+<p>Total output across nine reviewers: 104 structured comments.</p>
+<hr>
+<h2>What They Found</h2>
+<h3>The finding that surprised me most: a factual error</h3>
+<p>The Architect and Skeptic both independently caught something I hadn&#39;t noticed: the spec claimed the system could &quot;swap LLM backends with one config line.&quot; But Anthropic&#39;s SDK is not OpenAI-compatible. It uses a different package, different authentication, and a different request/response shape. The spec would have silently broken Anthropic support if implemented as written.</p>
+<p>This is the kind of error that&#39;s easy to miss when you wrote the spec  -  you know what you meant, so you read past the contradiction. Two independent reviewers with no coordination between them both caught it.</p>
+<h3>The hardest finding to catch yourself</h3>
+<p>The Domain Expert flagged that <code>trafilatura</code>  -  a specific library named in the spec for content extraction  -  is designed for web article pages and performs poorly on newsletter HTML. Multi-column layouts, image-heavy formatting, and tracked-link wrappers all cause it to extract garbage with no visible error. For a pipeline ingesting AI newsletters as a primary source, this would have produced bad output that looked fine from the outside.</p>
+<p>This isn&#39;t something that shows up in the library&#39;s documentation. It&#39;s specific knowledge about real-world behavior that you&#39;d only know from having used it on the wrong kind of content. Without the Domain Expert persona, it wouldn&#39;t have been discovered until weeks into implementation.</p>
+<p>Similarly, the Architect caught that GitHub Actions runners are ephemeral  -  the compute environment is wiped between runs. The spec used SQLite for deduplication caching. In a CI environment, that cache would be destroyed after every run, silently breaking the core deduplication logic. You&#39;d only discover this after deploying.</p>
+<h3>The internal contradiction I&#39;d written myself</h3>
+<p>Section 3.2 of the spec described the preprocessing pipeline in this order: Truncate → Pre-filter. Section 4.2&#39;s data flow diagram showed the opposite: Pre-filter → Truncator. </p>
+<p>These aren&#39;t just different orderings  -  they&#39;re structurally different pipelines with different cost implications. One throws away content before filtering; the other filters first and only extracts full content for relevant articles. The Architect flagged it as an <code>[AMBIGUITY]</code>. I&#39;d written both sections at different times and read them independently. I never saw the contradiction.</p>
+<h3>The second-order risk nobody mentioned</h3>
+<p>Security flagged something I hadn&#39;t thought through at the right level of abstraction: committing LLM-summarized newsletter content to a public GitHub repository could expose paid or private content from subscriptions. The spec had a buried disclaimer about this. Security pushed for <code>commit_digests: false</code> as the default configuration  -  requiring an explicit opt-in to public commits rather than making privacy the harder choice. That&#39;s a meaningful design shift with real-world implications for anyone who open-sources this kind of tool.</p>
+<h3>What consensus looked like</h3>
+<p>Two issues were flagged independently by all five of the initial reviewers without any coordination: the Gmail OAuth problem in GitHub Actions, and unlabeled placeholder values in the config. Getting five independent reviewers to converge on the same finding without communication is a strong signal  -  it&#39;s the kind of thing a solo reviewer might second-guess (&quot;am I being too picky?&quot;), but multiple independent voices validate it as a real problem.</p>
+<hr>
+<h2>Did the Spec Actually Improve?</h2>
+<p>I built a scoring system to answer this question  -  an AI-Readiness Score (ARS) that evaluates a spec across nine weighted dimensions, from unambiguity (25%) to failure mode coverage (3%). The scorer runs before and after the review cycle so you have a measurable delta, not just a gut feeling.</p>
+<p>Here&#39;s what the numbers looked like for ai-radar, going from the first draft (v0.1) to the post-review revision (v0.3):</p>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Before</th>
+<th>After</th>
+<th>Change</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Unambiguity (25%)</td>
+<td>5.5</td>
+<td>7.5</td>
+<td>+2.0</td>
+</tr>
+<tr>
+<td>Completeness (20%)</td>
+<td>4.5</td>
+<td>7.0</td>
+<td>+2.5</td>
+</tr>
+<tr>
+<td>Consistency (15%)</td>
+<td>5.0</td>
+<td>8.5</td>
+<td>+3.5</td>
+</tr>
+<tr>
+<td>Verifiability (15%)</td>
+<td>4.0</td>
+<td>6.5</td>
+<td>+2.5</td>
+</tr>
+<tr>
+<td>Implementation Guidance (10%)</td>
+<td>5.5</td>
+<td>7.5</td>
+<td>+2.0</td>
+</tr>
+<tr>
+<td>Forward Traceability (5%)</td>
+<td>6.5</td>
+<td>7.5</td>
+<td>+1.0</td>
+</tr>
+<tr>
+<td>Singularity (5%)</td>
+<td>5.0</td>
+<td>6.5</td>
+<td>+1.5</td>
+</tr>
+<tr>
+<td>Failure Mode Coverage (3%)</td>
+<td>2.5</td>
+<td>7.5</td>
+<td>+5.0</td>
+</tr>
+<tr>
+<td>Interface Contracts (2%)</td>
+<td>4.0</td>
+<td>7.0</td>
+<td>+3.0</td>
+</tr>
+<tr>
+<td><strong>Weighted Total</strong></td>
+<td><strong>4.91</strong></td>
+<td><strong>7.34</strong></td>
+<td><strong>+2.43</strong></td>
+</tr>
+</tbody></table>
+<p>The biggest gains were in Failure Mode Coverage (+5.0), Consistency (+3.5), and Interface Contracts (+3.0)  -  which map directly to what the reviewers found. The Operator caught that failure modes were almost entirely unspecified. The Architect caught the pipeline ordering contradiction that was driving the Consistency gap. The data model definitions and Section 3.7 failure handling that came out of the review fixed the Interface Contracts score.</p>
+<p>Verifiability (6.5) is the weakest remaining high-weight dimension  -  the spec still needs per-module acceptance criteria and prompt templates for Pass 1 and Pass 2. That&#39;s the known gap going into implementation.</p>
+<p>A score of 7.34 is &quot;nearly ready&quot; on the scale I use  -  short of the 8.5 implementation-ready threshold, but a meaningful improvement from a 4.91 first draft that was squarely in &quot;needs significant revision&quot; territory. The three remaining improvements before implementation are concrete and targeted, not a vague &quot;write better specs.&quot;</p>
+<hr>
+<h2>Is Nine Agents Worth It?</h2>
+<p>The question I actually care about is a layer up: what does this look like when you roll it out across a team, or as a gate in a delivery workflow? That starts with understanding where the value concentrates, which a single run can tell you.</p>
+<p>The honest answer: it depends on what you&#39;re building, and you don&#39;t need nine to get most of the value.</p>
+<p>The data from this run showed clear diminishing returns  -  the curve of net-new blocking and ambiguity findings started to flatten around reviewer 7 or 8. But the more interesting finding was that the second batch of reviewers (Domain Expert, Legal, Operator, Test Strategy) didn&#39;t just add more of the same findings. They found categorically different things.</p>
+<p>The original five covered the obvious: structural contradictions, missing data models, OAuth documentation gaps. These are issues a careful human engineering review would also catch  -  things that are visibly missing when you look for them.</p>
+<p>The four new reviewers found what I didn&#39;t know I didn&#39;t know: newsletter terms-of-service compliance, no test strategy for non-deterministic LLM outputs, silent pipeline failures with no notification mechanism. These are the issues that would have surfaced weeks into implementation.</p>
+<p>Based on what I learned, here&#39;s how I&#39;d think about which reviewers to run:</p>
+<p><strong>If you have 45-60 minutes:</strong> Run Architect, Domain Expert, Operator, and Test Strategy. These four cover the dimensions most likely to be missed  -  technical correctness, library-specific behavior, operational reality, and testability. This set captured about two-thirds of the unique blocking and ambiguity findings in my run.</p>
+<p><strong>If you have 90 minutes:</strong> Add Skeptic and Security. Skeptic is the only persona systematically asking &quot;what does this do when X goes wrong?&quot; Security is essential any time you&#39;re handling third-party credentials or data.</p>
+<p><strong>If you&#39;re building something new, LLM-based, or intended to be open-sourced:</strong> Run all nine. The marginal value per reviewer actually went up in the second batch, not down  -  because the new personas covered genuinely new territory.</p>
+<hr>
+<h2>What Didn&#39;t Work</h2>
+<p>I want to be honest about the failure modes, because they&#39;re instructive.</p>
+<p>All five initial reviewers flagged the Gmail OAuth issue in GitHub Actions  -  even though the spec had it listed in an explicit Open Questions section as an unresolved architectural decision. The protocol had no mechanism to prevent reviewers from echoing known open questions back without adding resolution. I&#39;ve since added a check to the base instructions: before posting any finding, check whether it already appears in the Open Questions section. Only include it if you have a concrete resolution the spec lacks.</p>
+<p>Three of five reviewers also used <code>[LABEL]</code> in plain text instead of <code>**[LABEL]**</code> in bold, which broke GitHub rendering. The fix was straightforward  -  making the format requirement explicit with correct and incorrect examples rather than just saying &quot;follow this structure.&quot; Agents follow explicit format requirements reliably when the requirement is stated unambiguously.</p>
+<p>One reviewer session accidentally posted its review twice. Small thing, but worth noting.</p>
+<hr>
+<h2>The Takeaway</h2>
+<p>The meta-insight from running this twice is about what kind of problems different reviewers catch.</p>
+<p>A spec can be architecturally coherent, internally consistent, and well-documented and still produce an implementation that violates its publisher&#39;s terms of service, fails silently every morning, and ships with a test suite that passes while the pipeline is producing wrong outputs. The reviewers that prevented those outcomes weren&#39;t the ones reviewing the spec&#39;s internal structure. They were the ones asking: &quot;Will this be legal?&quot; &quot;Will I know when it breaks?&quot; &quot;Can I actually verify it works?&quot;</p>
+<p>The 90 minutes you invest in spec review before a 2-4 week implementation project is not overhead. It&#39;s the cheapest testing you&#39;ll ever do.</p>
+<hr>
+<h2>Try It Yourself</h2>
+<p>Everything in this framework is in my public repository: <a href="https://github.com/lilacmohr/ai-engineering-playbook/tree/main/01-spec-review">ai-engineering-playbook/01-spec-review</a>. This includes the persona prompts, base instructions, synthesis agent, and scorecard template.</p>
+<p>Start at Level 1: manually combine <code>base-instructions.md</code> with a single persona file, paste into a Claude Code session, and have it review your spec PR. You don&#39;t need nine reviewers to see whether this produces value. Run the Skeptic alone and see what it finds.</p>
+<p>The project this was tested against is also public: <a href="https://github.com/lilacmohr/ai-radar">ai-radar</a>.</p>
+
+    </article>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <span class="footer-brand">Lilac Mohr</span>
+            <div class="footer-links">
+                <a href="https://www.linkedin.com/in/lilac-mohr/" target="_blank" rel="noopener">LinkedIn</a>
+                <p>&copy; 2026 All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
