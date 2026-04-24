@@ -1,6 +1,16 @@
 {
   "articles": [
     {
+      "id": "tdd-is-not-optional-with-ai",
+      "title": "TDD Is No Longer Optional",
+      "category": "implementation",
+      "date": "2026-04-23",
+      "displayOrder": 2,
+      "preview": "I spent years as an engineering executive watching TDD get adopted in name and skipped in practice — and I didn't push back hard enough. Working with AI coding agents changed my view entirely. When a human skips writing tests first, the cost is localized. When an AI agent skips it, correctness becomes a matter of faith across sessions you can't fully read. This article covers the red-green-retro cycle I developed through personal research: a complete workflow with ticket pairs, enforcement hooks, briefing documents, DECISION issues, and per-phase retros — plus a practical guide to rolling it out on an existing team.",
+      "image": "images/hero-tdd-is-not-optional-with-ai.png",
+      "readTime": "25 min read"
+    },
+    {
       "id": "nine-agents-reviewed-my-spec",
       "title": "I Had 9 AI Agents Review My Spec. Here's What They Found That I Couldn't.",
       "category": "implementation",

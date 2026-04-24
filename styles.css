@@ -758,6 +758,16 @@ body {
     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
+.article-body img.diagram {
+    max-width: 50%;
+}
+
+@media (max-width: 768px) {
+    .article-body img.diagram {
+        max-width: 100%;
+    }
+}
+
 .article-body table {
     width: 100%;
     border-collapse: collapse;
