@@ -1,6 +1,16 @@
 {
   "articles": [
     {
+      "id": "what-acquisitions-taught-me",
+      "title": "What Two Acquisitions Taught Me",
+      "category": "culture",
+      "date": "2026-04-29",
+      "displayOrder": 1,
+      "preview": "When the GitPrime acquisition was announced, the room cheered and I sat quietly, convinced my job was over. I stayed for nearly eight years - through a reskin that turned out to be a full rewrite, an architecture migration we had to partially roll back, and a second acquisition where I finally had a seat at the table. This article covers the framework I developed for distinguishing integration that creates customer value from integration that creates organizational symmetry, and the model that lets an acquired team keep the agility that made it worth acquiring in the first place.",
+      "image": "images/hero-what-acquisitions-taught-me.png",
+      "readTime": "18 min read"
+    },
+    {
       "id": "tdd-is-not-optional-with-ai",
       "title": "TDD Is No Longer Optional",
       "category": "implementation",

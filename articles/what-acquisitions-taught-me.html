@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What Two Acquisitions Taught Me — Lilac Mohr</title>
+    <meta name="description" content="When the GitPrime acquisition was announced, the room cheered and I sat quietly, convinced my job was over. I stayed for nearly eight years - through a reskin that turned out to be a full rewrite, an architecture migration we had to partially roll back, and a second acquisition where I finally had a seat at the table. This article covers the framework I developed for distinguishing integration that creates customer value from integration that creates organizational symmetry, and the model that lets an acquired team keep the agility that made it worth acquiring in the first place.">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Lilac Mohr">
+    <meta property="og:title" content="What Two Acquisitions Taught Me">
+    <meta property="og:description" content="When the GitPrime acquisition was announced, the room cheered and I sat quietly, convinced my job was over. I stayed for nearly eight years - through a reskin that turned out to be a full rewrite, an architecture migration we had to partially roll back, and a second acquisition where I finally had a seat at the table. This article covers the framework I developed for distinguishing integration that creates customer value from integration that creates organizational symmetry, and the model that lets an acquired team keep the agility that made it worth acquiring in the first place.">
+    <meta property="og:url" content="https://lilacmohr.com/articles/what-acquisitions-taught-me.html">
+    <meta property="og:image" content="https://lilacmohr.com/images/hero-what-acquisitions-taught-me.png">
+    <meta property="article:published_time" content="2026-04-29">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://lilacmohr.com/articles/what-acquisitions-taught-me.html">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="What Two Acquisitions Taught Me">
+    <meta name="twitter:description" content="When the GitPrime acquisition was announced, the room cheered and I sat quietly, convinced my job was over. I stayed for nearly eight years - through a reskin that turned out to be a full rewrite, an architecture migration we had to partially roll back, and a second acquisition where I finally had a seat at the table. This article covers the framework I developed for distinguishing integration that creates customer value from integration that creates organizational symmetry, and the model that lets an acquired team keep the agility that made it worth acquiring in the first place.">
+    <meta name="twitter:image" content="https://lilacmohr.com/images/hero-what-acquisitions-taught-me.png">
+
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="/" class="logo">Lilac Mohr</a>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="/category.html?cat=implementation">AI Implementation</a>
+                <a href="/category.html?cat=measurement-strategy">Measurement &amp; Strategy</a>
+                <a href="/category.html?cat=culture">Culture</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Article Header -->
+    <header class="article-header">
+        <div class="article-header-inner">
+            <p class="article-breadcrumb"><a href="/">← All Articles</a></p>
+            <h1 class="article-page-title">What Two Acquisitions Taught Me</h1>
+            <div class="article-page-meta">
+                <span>Culture &amp; Leadership</span>
+                <span>April 29, 2026</span>
+                <span>18 min read</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Article Hero Image -->
+    <div class="article-hero-image" id="article-hero-image">
+        <img src="/images/hero-what-acquisitions-taught-me.png" alt="What Two Acquisitions Taught Me">
+    </div>
+
+    <!-- Article Body -->
+    <article class="article-body">
+        <p>When the GitPrime acquisition was announced, everyone in the Zoom call cheered but I stayed quiet. My first thought was: <em>I just lost my job.</em></p>
+<p>As a Director of Engineering, I wasn&#39;t part of the acquisition discussions - the announcement was the first I&#39;d heard of it. The horror stories were everywhere - talent walks out, products get sunset, cultures get absorbed and flattened. I didn&#39;t know what to think. So I sat quietly while everyone else celebrated, running through the scenarios in my head.</p>
+<p>What I couldn&#39;t have known then: I would stay with that same product for almost eight years. The acquisition would give me career growth opportunities I couldn&#39;t have imagined, and those years would teach me more about engineering leadership than the previous twenty years of my software engineering career combined.</p>
+<p>There were lessons to learn, too - some of them expensive.</p>
+<hr>
+<h2>The Integration Trap</h2>
+<p>The statistics on acquisition failure are sobering. Research by NYU Stern professors Baruch Lev and Feng Gu, <a href="https://fortune.com/2024/11/13/we-analyzed-40000-mergers-acquisitions-ma-deals-over-40-years-why-70-75-percent-fail-leadership-finance/">analyzing 40,000 M&amp;A deals over 40 years</a>, found that 70–75% fail to deliver expected value - and that failure rate has been rising, not falling. Harvard Business Review puts the range at <a href="https://hbr.org/2020/03/dont-make-this-common-ma-mistake">70–90%</a>. The primary culprit, across nearly every study: integration difficulties.</p>
+<p>Most explanations stop there, but I&#39;ve spent years thinking a level deeper by asking <em>which</em> integration decisions cause the damage, and why they&#39;re so hard to get right in the moment.</p>
+<p>When a larger company acquires a smaller one, there&#39;s a natural and understandable impulse to make things consistent: the same design library, the same architecture, the same processes.</p>
+<p>The problem is that not all integration creates value for the customer. Some of it just creates conformity for the organization, and when you&#39;re building software, those two things are not the same.</p>
+<p>After GitPrime became Pluralsight Flow, we faced exactly this pressure - and we didn&#39;t always push back on the right things.</p>
+<hr>
+<h2>The Reskin That Wasn&#39;t</h2>
+<p>One of our first major integration projects was converting our frontend to use the Pluralsight Design Library and move all pages to dark mode.</p>
+<p>Leadership framed it as a reskin, and at the time, that seemed reasonable. The engineers closest to the front-end codebase had concerns early, but the full complexity only became clear once we were in it. Six months of engineering time later, it was obvious why.</p>
+<p>A true reskin swaps colors and fonts. What we actually faced was a rewriting effort - rebuilding component logic, rethinking interaction patterns, reconciling design systems that had evolved in different directions. The customer experience changed and the engineering investment was substantial. At the end of it, however, we had a product that looked more like Pluralsight but didn&#39;t work better for the people who used it every day.</p>
+<p>That wasn&#39;t nothing - brand cohesion has real value, and customers care about a consistent experience across a platform. We went in thinking it was a paint job and discovered it was a renovation. The gap between those two things cost us months that could have been spent on new features.</p>
+<p><strong>The lesson:</strong> Before committing to any integration work, ask whether the outcome creates value for the customer or consistency for the organization. Sometimes the answer is both. Sometimes it&#39;s only one. Know which one you&#39;re solving for before you start.</p>
+<hr>
+<h2>The Architecture That Worked Everywhere Except Here</h2>
+<p>Pluralsight had a mature Domain-Driven Design architecture - bounded contexts with clearly defined ownership, independent deployability, and clean separation of concerns. It worked well for them and was genuinely good engineering.</p>
+<p>We were encouraged to implement the same model on Flow&#39;s monolithic system.</p>
+<p>The concept was sound, and it solved real problems: a growing team stepping on each other in the same monolithic repo and a code-freeze deployment process instead of continuous delivery. Independent deployment and clearly bounded domains were things we wanted. One aspect of that architecture - maintaining a copy of the database in every bounded context - turned out to be the wrong fit for our specific customer base.</p>
+<p>Flow had on-premises, self-hosted customers. For them, eventual consistency wasn&#39;t an abstract architectural trade-off. We implemented change data capture with Debezium, which worked most of the time, but when things went wrong, eventual consistency was measured in days - that&#39;s not eventual as in seconds or minutes - that&#39;s eventual as in your data might catch up by the end of the week. To be fair to Domain-Driven Design: you&#39;re not supposed to copy the entire database into every bounded context, just the relevant tables. The tight coupling in our monolithic database, however, made that impractical, which is part of why the failure mode was so severe.</p>
+<p>That&#39;s not an architecture problem. That&#39;s a context problem. The pattern was right for Pluralsight&#39;s deployment environment. It was wrong for ours. Because we didn&#39;t think that through before committing to the migration, we spent months on infrastructure work that yielded mixed results. Some of it was genuinely valuable - organizing teams around domains and enabling continuous independent deployments. The rest we had to abandon: we rolled back to a single database, and all the work on CDC and synchronization was thrown away.</p>
+<p>The DORA research on software delivery performance is instructive here. <a href="https://dora.dev/guides/dora-metrics/">DORA&#39;s multi-year findings</a> consistently show that deployment frequency and lead time for changes are among the strongest predictors of organizational performance - and that these metrics degrade quickly when teams take on large, undifferentiated infrastructure work that doesn&#39;t map to customer outcomes. We were experiencing that degradation in real time, without the vocabulary to name it.</p>
+<p><strong>The lesson:</strong> Good architecture is context-dependent. Before adopting the parent company&#39;s technical patterns, map them against your specific constraints: your deployment model, your customer profile, your data requirements. The question isn&#39;t whether the pattern is good. It&#39;s whether it&#39;s good <em>here</em>.</p>
+<hr>
+<h2>What to Integrate, and What to Leave Alone</h2>
+<p>These two experiences gave me a framework I&#39;ve used in every acquisition context since: <strong>distinguish between integration that creates shared value and integration that creates organizational symmetry.</strong></p>
+<p>Authentication integration, for example, was exactly right. A customer using multiple Pluralsight products shouldn&#39;t have to manage separate credentials. That integration directly reduced friction for real users. The engineering investment mapped to customer value.</p>
+<p>The design library conversion and the architecture migration were different. They made the organization feel more cohesive. They satisfied internal stakeholders. The customer benefit was indirect at best, and the cost to engineering velocity was concrete and immediate.</p>
+<p>The test I now apply before any integration decision: <em>If we didn&#39;t have a parent company asking for this, would we build it?</em> If the answer is no, that&#39;s not a reason to refuse - there are legitimate organizational benefits to integration beyond direct customer value. It is, however, a reason to be honest about what you&#39;re trading and why.</p>
+<p>McKinsey&#39;s research on technical debt puts a useful frame around the cost of getting this wrong: companies that allow integration-driven technical debt to accumulate can find engineers spending <a href="https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/tech-debt-reclaiming-tech-equity">up to 75% of their time</a> servicing that debt rather than building new value. Even where the architecture migration delivered value - better team boundaries, continuous deployments - the portions we had to unwind cost us months we hadn&#39;t planned to spend, against a deployment model we hadn&#39;t fully thought through.</p>
+<hr>
+<h2>The Culture Problem Is Harder Than the Technical Problem</h2>
+<p>The technical mistakes were expensive. The cultural ones would have been more so.</p>
+<p>After the acquisition, I made a deliberate choice: I wanted the Flow team to be <em>part</em> of Pluralsight, not a foreign object inside it. That meant showing up - joining company-wide guilds, participating in book clubs, engaging with the mentorship program, making sure our engineers had relationships across the broader organization. Acquisitions fail when the acquired team stays siloed, resents the parent company, or waits to see what happens before committing. I didn&#39;t want that.</p>
+<p>I also wanted to protect something: the agility that had made GitPrime worth acquiring in the first place.</p>
+<p>Startups move fast because decisions are made by small groups of people who are close to the problem. They ship quickly because there&#39;s no approval chain between an idea and a deploy. They stay scrappy because there&#39;s no bureaucracy to absorb the impact of every change. That&#39;s not incidental to a startup&#39;s value - it often <em>is</em> the value. An acquirer who absorbs all of that into their existing process can inadvertently destroy what they paid for.</p>
+<p>The model that worked for us: <strong>a startup within a larger organization.</strong> Flow ran as its own business unit. We maintained our own roadmap, our own decision-making cadence, our own ways of working. We were part of Pluralsight - culturally, socially, organizationally - but we operated with the autonomy of a team that still had something to prove.</p>
+<p>There&#39;s a name for this in the management research literature. Organizational theorists Charles O&#39;Reilly and Michael Tushman at Harvard and Stanford call it the <a href="https://hbr.org/2004/04/the-ambidextrous-organization">ambidextrous organization</a> - the ability to simultaneously exploit existing capabilities (the parent company&#39;s stability, resources, and distribution) while exploring new ones (the startup&#39;s agility and product focus). In their study of 35 attempts at breakthrough innovation, more than 90% of efforts structured as ambidextrous - separate units with their own processes and cultures, integrated at the senior leadership level - succeeded, compared to 25% or fewer for teams embedded directly into the parent&#39;s operating structure.</p>
+<p>That gave our engineers the best of both: the stability, benefits, and professional network of a large company; the speed, ownership, and directness of a startup. I&#39;ve seen this model work well enough in practice that I&#39;d advocate for it in almost any acquisition context where the acquired product needs to continue executing independently.</p>
+<hr>
+<h2>What I Did Differently the Second Time</h2>
+<p>When Pluralsight Flow was later acquired by Appfire, I was Head of Engineering - the most senior technical leadership role at Flow - and was involved in the acquisition process from the beginning. I had the benefit of having made the expensive mistakes already, and this time I had a seat at the table to do something about it.</p>
+<p>The first question I asked was not <em>how do we integrate</em> but <em>what actually needs to connect?</em> I was specific about integration points that created real value, and skeptical of integration work that was primarily about organizational aesthetics. I was more willing to push back when the answer to &quot;why are we doing this?&quot; was &quot;because that&#39;s how we do it here.&quot;</p>
+<p>The clearest example of that came early. Appfire&#39;s existing portfolio was tightly integrated into the Atlassian ecosystem - every product they owned was Jira-native. Flow, by contrast, was a standalone application with data integrations across a large number of vendors. The gravitational pull toward a Jira-only focus was real and understandable: it would have made Flow look more like everything else in the portfolio.</p>
+<p>It also would have destroyed much of what made Flow valuable. A significant portion of our customers weren&#39;t Atlassian shops, and a Jira-only roadmap would have meant walking away from them. Senior leadership agreed, and we made the call explicitly: Flow would continue running as an independent business unit, maintaining its own product and technical roadmap. Rather than focusing on technology integration between Flow and Appfire&#39;s existing product line, the priority shifted to cross-selling and building stronger customer relationships across both bases. The integration that made sense was commercial, not architectural.</p>
+<p>I was also more intentional about protecting delivery velocity during the transition. Acquisitions create uncertainty, and uncertainty makes teams slow down - waiting for direction, avoiding risk, holding off on long-term investments. The most important thing a leader can do in that period is keep the team shipping - not because the work won&#39;t change, but because momentum is easier to maintain than to rebuild.</p>
+<p>Appfire also did something early that I&#39;ve thought about since: shortly after the acquisition was announced, their leadership organized an offsite so the Flow team could meet Appfire leadership and team members in person. It wasn&#39;t a strategy session or an integration planning meeting. It was an investment in belonging - giving people on both sides a chance to become real to each other before the hard work of merging two organizations began. That kind of gesture doesn&#39;t show up in any integration plan, but its impact on how the team experienced the transition was immediate and lasting. It&#39;s the kind of thing an acquirer can do that costs very little and prevents an enormous amount of cultural damage.</p>
+<hr>
+<h2>What This Means for Any Acquired Engineering Team</h2>
+<p>These lessons come from a specific kind of acquisition - one where the goal was to add a distinct product to a portfolio and keep it running. Acqui-hires, team consolidations, and capability rollups have different dynamics, and some of this will apply more directly than others.</p>
+<p>If you&#39;re an engineering leader stepping into an acquisition - either as the acquired or the acquirer - a few things I&#39;d put in front of you:</p>
+<p><strong>Map integration decisions against customer value, not organizational symmetry.</strong> Some integration is genuinely good for customers. Some is good for internal stakeholders. Some is just habit. Know which one you&#39;re doing.</p>
+<p><strong>Respect context before adopting patterns.</strong> Good architecture from the parent company may be the wrong architecture for your product, your customers, or your deployment model. Understand the constraints before you commit.</p>
+<p><strong>Protect what made the product worth acquiring.</strong> Agility, directness, and speed of decision-making are not soft perks. They&#39;re often the source of the value that justified the acquisition. Be deliberate about what you preserve.</p>
+<p><strong>Make the team part of the larger culture without making them disappear into it.</strong> Integration and absorption are different things. Flow engineers joined Pluralsight guilds, participated in mentorship programs, and built relationships across the broader organization - and they did all of that while still maintaining their own roadmap, their own decision-making cadence, and their own ways of working. That&#39;s what integration looked like. Absorption would have meant losing those things. You want the first. The second often destroys what you were trying to integrate.</p>
+<hr>
+<p>The room cheered when the GitPrime acquisition was announced. I sat there quietly, convinced my job was over.</p>
+<p>What I didn&#39;t understand yet: the acquisition wasn&#39;t an ending. It was an accelerant - for my career, for the product, and eventually for the lessons that would make me better at every transition that came after.</p>
+<p>Every acquired engineering team is going to face pressure to look more like the parent. The job of engineering leadership is knowing which pressures to absorb, which to push back on, and which architectural decisions will cost you a year of competitive momentum.</p>
+<p>That judgment doesn&#39;t come from a framework. It comes from having made the expensive mistakes first - and being honest enough to name them. After two acquisitions, the lesson reduces to this: protect the thing they paid for. Everything else is negotiable.</p>
+
+    </article>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <span class="footer-brand">Lilac Mohr</span>
+            <div class="footer-links">
+                <a href="https://www.linkedin.com/in/lilac-mohr/" target="_blank" rel="noopener">LinkedIn</a>
+                <p>&copy; 2026 All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
