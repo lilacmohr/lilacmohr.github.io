@@ -2,19 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://lilacmohr.com/</loc>
-    <lastmod>2026-04-29</lastmod>
+    <lastmod>2026-05-05</lastmod>
   </url>
   <url>
     <loc>https://lilacmohr.com/category.html?cat=implementation</loc>
-    <lastmod>2026-04-29</lastmod>
+    <lastmod>2026-05-05</lastmod>
   </url>
   <url>
     <loc>https://lilacmohr.com/category.html?cat=measurement-strategy</loc>
-    <lastmod>2026-04-29</lastmod>
+    <lastmod>2026-05-05</lastmod>
   </url>
   <url>
     <loc>https://lilacmohr.com/category.html?cat=culture</loc>
-    <lastmod>2026-04-29</lastmod>
+    <lastmod>2026-05-05</lastmod>
+  </url>
+  <url>
+    <loc>https://lilacmohr.com/articles/your-team-is-picking-llm-models.html</loc>
+    <lastmod>2026-05-04</lastmod>
   </url>
   <url>
     <loc>https://lilacmohr.com/articles/what-acquisitions-taught-me.html</loc>
