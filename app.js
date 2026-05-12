@@ -329,7 +329,19 @@ class ArticlePage {
                     breaks: true,
                     gfm: true
                 });
-                bodyElement.innerHTML = marked.parse(markdown);
+                // Open external links in a new tab without sending a referrer,
+                // which prevents bot-detection false positives on sites like ScienceDirect.
+                const renderer = new marked.Renderer();
+                renderer.link = function({ href, title, tokens }) {
+                    const text = this.parser.parseInline(tokens);
+                    const isExternal = href && (href.startsWith('http://') || href.startsWith('https://'));
+                    const titleAttr = title ? ` title="${title}"` : '';
+                    if (isExternal) {
+                        return `<a href="${href}"${titleAttr} target="_blank" rel="noreferrer noopener">${text}</a>`;
+                    }
+                    return `<a href="${href}"${titleAttr}>${text}</a>`;
+                };
+                bodyElement.innerHTML = marked.parse(markdown, { renderer });
             }
         } catch (error) {
             console.error('Error loading article content:', error);

@@ -1,11 +1,21 @@
 {
   "articles": [
     {
+      "id": "moral-objections-to-ai",
+      "title": "When Your Engineer Has a Moral Objection to AI",
+      "category": "culture",
+      "date": "2026-05-12",
+      "displayOrder": 0,
+      "preview": "AI adoption is a strategic imperative. But what happens when a member of your team shows up to a 1:1 with a principled moral objection to the tools you're deploying - one grounded in real environmental data? This article draws a sharp line between the narrative-based fear that deserves curious examination and the environmental objection that leaders can't Brené Brown their way through, and it's honest about what neither the adoption playbooks nor the coaching frameworks have worked out yet.",
+      "image": "images/hero-moral-objections-to-ai.png",
+      "readTime": "7 min read"
+    },
+    {
       "id": "your-team-is-picking-llm-models",
       "title": "Your Team Is Picking LLM Models Without Measuring Them",
       "category": "measurement-strategy",
       "date": "2026-05-04",
-      "displayOrder": 0,
+      "displayOrder": 1,
       "preview": "Most engineering leaders are having the wrong AI cost conversation. The question isn't whether to use the cheaper model - it's whether your team has any rigorous way to know if the model you're running is actually doing its job. Without a baseline, a model that's wrong 40% of the time looks identical to one that's right 80% of the time: coherent output, valid schema, plausible reasoning. This article covers the eval methodology that surfaces the difference, why confidence scores can make the problem worse, and how to make model quality measurement a standard part of how your team ships AI features.",
       "image": "images/hero-pr-risk-eval.png",
       "readTime": "16 min read"
@@ -15,7 +25,7 @@
       "title": "What Two Acquisitions Taught Me",
       "category": "culture",
       "date": "2026-04-29",
-      "displayOrder": 1,
+      "displayOrder": 2,
       "preview": "When the GitPrime acquisition was announced, the room cheered and I sat quietly, convinced my job was over. I stayed for nearly eight years - through a reskin that turned out to be a full rewrite, an architecture migration we had to partially roll back, and a second acquisition where I finally had a seat at the table. This article covers the framework I developed for distinguishing integration that creates customer value from integration that creates organizational symmetry, and the model that lets an acquired team keep the agility that made it worth acquiring in the first place.",
       "image": "images/hero-what-acquisitions-taught-me.png",
       "readTime": "18 min read"
@@ -25,7 +35,7 @@
       "title": "TDD Is No Longer Optional",
       "category": "implementation",
       "date": "2026-04-23",
-      "displayOrder": 2,
+      "displayOrder": 3,
       "preview": "I spent years as an engineering executive watching TDD get adopted in name and skipped in practice - and I didn't push back hard enough. Working with AI coding agents changed my view entirely. When a human skips writing tests first, the cost is localized. When an AI agent skips it, correctness becomes a matter of faith across sessions you can't fully read. This article covers the red-green-retro cycle I developed through personal research: a complete workflow with ticket pairs, enforcement hooks, briefing documents, DECISION issues, and per-phase retros - plus a practical guide to rolling it out on an existing team.",
       "image": "images/hero-tdd-is-not-optional-with-ai.png",
       "readTime": "25 min read"
@@ -35,7 +45,7 @@
       "title": "I Had 9 AI Agents Review My Spec. Here's What They Found That I Couldn't.",
       "category": "implementation",
       "date": "2026-04-15",
-      "displayOrder": 3,
+      "displayOrder": 4,
       "preview": "Nine AI reviewer personas, each with a specialized lens, ran independently against the spec for my personal project. They found a factual error about Anthropic's SDK, a library that silently produces garbage on newsletter HTML, and a pipeline ordering contradiction I'd written myself across two sections. This article covers how the multi-agent review protocol works, what each type of reviewer catches that others don't, and when the 90 minutes is worth it.",
       "image": "images/hero-nine-agents-reviewed-my-spec.png",
       "readTime": "11 min read"
