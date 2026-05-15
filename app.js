@@ -170,7 +170,7 @@ if (featuredSection) {
             'culture': 'Culture & Leadership'
         };
         return `
-            <article class="article-card article-card-lead" data-category="${article.category}" onclick="window.location.href='article.html?id=${article.id}'">
+            <article class="article-card article-card-lead" data-category="${article.category}" onclick="window.location.href='articles/${article.id}.html'">
                 <img src="${article.image}" alt="${article.title}" class="article-image">
                 <div class="article-content">
                     <span class="article-category">${categoryNames[article.category]}</span>
@@ -244,7 +244,7 @@ if (featuredSection) {
 
         const filtered = this.articles.filter(a => a.category === currentCategory);
         navContainer.innerHTML = filtered.map((article, index) => `
-            <a href="article.html?id=${article.id}" 
+            <a href="articles/${article.id}.html"
                class="category-nav-item ${index === 0 ? 'active' : ''}"
                data-id="${article.id}">
                 ${article.title}
@@ -262,7 +262,7 @@ if (featuredSection) {
         };
 
         return `
-            <article class="article-card" data-category="${article.category}" onclick="window.location.href='article.html?id=${article.id}'">
+            <article class="article-card" data-category="${article.category}" onclick="window.location.href='articles/${article.id}.html'">
                 <img src="${article.image}" alt="${article.title}" class="article-image">
                 <div class="article-content">
                     <span class="article-category">${categoryNames[article.category]}</span>
