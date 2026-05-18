@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Dataset Is the Decision: What Training a Vision Model Taught Me About Model Selection — Lilac Mohr</title>
+    <meta name="description" content="Claude told me to collect 500 images and I groaned. Before labeling a single one, I ran dataset diversity analysis - and the resolution distribution was the tell: thin coverage of distant runners, exactly where bibs appear as small, hard-to-detect objects. The failure mode analysis confirmed it - missed bibs were six times smaller than detected ones. This article covers the dataset analysis steps most teams skip, what the data showed about two popular architectures trained on the same 217 images, and why the licensing question belongs at the start of model selection, not the end.">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Lilac Mohr">
+    <meta property="og:title" content="The Dataset Is the Decision: What Training a Vision Model Taught Me About Model Selection">
+    <meta property="og:description" content="Claude told me to collect 500 images and I groaned. Before labeling a single one, I ran dataset diversity analysis - and the resolution distribution was the tell: thin coverage of distant runners, exactly where bibs appear as small, hard-to-detect objects. The failure mode analysis confirmed it - missed bibs were six times smaller than detected ones. This article covers the dataset analysis steps most teams skip, what the data showed about two popular architectures trained on the same 217 images, and why the licensing question belongs at the start of model selection, not the end.">
+    <meta property="og:url" content="https://lilacmohr.com/articles/race-vision.html">
+    <meta property="og:image" content="https://lilacmohr.com/images/hero-race-vision.png">
+    <meta property="article:published_time" content="2026-05-17">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://lilacmohr.com/articles/race-vision.html">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="The Dataset Is the Decision: What Training a Vision Model Taught Me About Model Selection">
+    <meta name="twitter:description" content="Claude told me to collect 500 images and I groaned. Before labeling a single one, I ran dataset diversity analysis - and the resolution distribution was the tell: thin coverage of distant runners, exactly where bibs appear as small, hard-to-detect objects. The failure mode analysis confirmed it - missed bibs were six times smaller than detected ones. This article covers the dataset analysis steps most teams skip, what the data showed about two popular architectures trained on the same 217 images, and why the licensing question belongs at the start of model selection, not the end.">
+    <meta name="twitter:image" content="https://lilacmohr.com/images/hero-race-vision.png">
+
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="/" class="logo">Lilac Mohr</a>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="/category.html?cat=implementation">AI Implementation</a>
+                <a href="/category.html?cat=measurement-strategy">Measurement &amp; Strategy</a>
+                <a href="/category.html?cat=culture">Culture</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Article Header -->
+    <header class="article-header">
+        <div class="article-header-inner">
+            <p class="article-breadcrumb"><a href="/">← All Articles</a></p>
+            <h1 class="article-page-title">The Dataset Is the Decision: What Training a Vision Model Taught Me About Model Selection</h1>
+            <div class="article-page-meta">
+                <span>AI Implementation</span>
+                <span>May 17, 2026</span>
+                <span>14 min read</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Article Hero Image -->
+    <div class="article-hero-image" id="article-hero-image">
+        <img src="/images/hero-race-vision.png" alt="The Dataset Is the Decision: What Training a Vision Model Taught Me About Model Selection">
+    </div>
+
+    <!-- Article Body -->
+    <article class="article-body">
+        <p><em>I trained two object detection models on the same 217-image dataset to compare architecture choices and licensing tradeoffs.</em></p>
+<hr>
+<p>When Claude told me to find and annotate 500 images, I literally groaned. </p>
+<p>I build weekend projects to stay connected to the technical decisions I&#39;m making as an engineering leader. This one was to train and compare two object detection models on race photos to identify bibs (the numbered tags pinned to runners&#39; shirts). It seemed straightforward enough - one class, a pre-trained model with a one-command training script - but when I thought of the manual work involved in creating the dataset, the weekend timebox for this project seemed daunting.</p>
+<p>My statistics background kept nagging at me: training data quality matters more than any model choice. Rather than just labeling more images, I wanted to understand what a quality dataset actually looks like for this task.</p>
+<hr>
+<h2>The Project</h2>
+<p>As a follow-up to <a href="https://lilacmohr.com/articles/your-team-is-picking-llm-models.html">my LLM eval piece</a>, I wanted to test whether the same evaluation discipline applied to computer vision models.</p>
+<p>An object detection model identifies what objects are in a scene and where they are, drawing bounding boxes around each one. Popular models like YOLO and RF-DETR start from weights pre-trained on millions of general-purpose images - they already recognize hundreds of common objects. Fine-tuning adapts that general knowledge to a specific task by continuing to train on a smaller, domain-specific dataset.</p>
+<p>As a runner, I thought I&#39;d start by fine-tuning models to detect bibs in race photos:</p>
+<img src="../images/bib-detect-example1.jpeg" alt="YOLOv8n detecting a race bib at 87% confidence" style="max-width: 500px; width: 100%; height: auto; display: block; margin: 0 auto;">
+
+<p>Unlike vision model applications where someone&#39;s life is at stake, my accuracy bar was lower - the bounding boxes needed to be directionally correct, overlapping at least 50% of the actual bib boundary. This measurement is called mAP50 (Mean Average Precision at 50% Intersection over Union).</p>
+<p>I trained two models on the same dataset:</p>
+<ul>
+<li><strong>YOLOv8 nano</strong> - the most widely deployed object detection architecture, fast, mature, and AGPL-3.0 licensed</li>
+<li><strong>RF-DETR Nano</strong> - a newer transformer-based architecture from Roboflow, Apache 2.0 licensed</li>
+</ul>
+<p>Both can be trained and used without licensing fees for experimentation. The difference that matters commercially is what happens when you deploy.</p>
+<p>YOLOv8 is AGPL-3.0 licensed. That means: if you build a service or API that uses this model and other people access it over a network, you must release your source code under the same license. For a commercial SaaS product, that&#39;s not an option. You would need to pay Ultralytics a yearly fee for a Commercial License to keep your code closed-source.</p>
+<p>RF-DETR is Roboflow&#39;s Detection Transformer, built on a DINOv2 vision backbone with a transformer-based detection head. Apache 2.0 licensed: use it commercially, close-source your service, no obligation.</p>
+<p>I trained both models locally on my laptop (Apple M4 silicon) using the same dataset of 217 images, 416 hand-labeled bib annotations in Roboflow.</p>
+<p>In the process, I learned as much about the workflow as I did about the models - specifically, the steps that matter most and that most teams skip.</p>
+<hr>
+<h2>The Steps Most Teams Skip</h2>
+<p>Most teams treat dataset collection as a ticket - <em>&quot;get 500 images of race bibs&quot;</em> - rather than a design problem.</p>
+<p>The default path is to collect data, run training script, evaluate result. But in machine learning, more data is not necessarily better. In this project, for example, if I&#39;m trying to detect bibs from any race, training the model on 500 images from the same race is worse than training on a much smaller but more diverse dataset - 100 images across multiple races and conditions. The quantity metric is real, but it hides a quality metric that matters more: distribution.</p>
+<p>I see the importance of context for my kids all the time. My son talks to his grandmother on video call every week. He&#39;s enthusiastic, engaged, and knows exactly who she is. But when grandma came to visit in person, he didn&#39;t recognize her at first. The context had changed. He&#39;d seen her plenty of times, but always on the same screen.</p>
+<p>Similarly, a model trained on homogenous data doesn&#39;t learn to detect bibs. It learns to detect bibs <em>at that race</em> - that finish line banner, that lighting condition, that camera angle, that bib font. Deploy it on a trail race in overcast conditions with a different bib design and it falls apart. And if your validation data and test data came from that same race, the results will look great, leaving you to discover the problem in production. </p>
+<p>In higher-stakes applications, the consequences of homogeneous training data can be severe. <a href="https://www.cc.gatech.edu/news/620309/research-reveals-possibly-fatal-consequences-algorithmic-bias">A 2019 Georgia Tech study</a> found that pedestrian detection systems in self-driving cars were up to 5% less accurate at detecting people with darker skin tones - a direct result of training datasets that underrepresented them.</p>
+<p>Two steps that address this - and that most teams skip - are Dataset Diversity Analysis and Failure Mode Analysis.</p>
+<img src="../images/vision-model-workflow.png" alt="Vision model training workflow, highlighting two frequently skipped steps: dataset diversity analysis and failure mode analysis" style="max-width: 100%; height: auto; display: block; margin: 0 auto;">
+
+<p>The discipline that sits between &quot;we have data&quot; and &quot;we train the model&quot; is <strong>Exploratory Data Analysis</strong> (EDA) - and it&#39;s the step most tutorials skip. For vision models specifically, the critical subset is <strong>Dataset Diversity Analysis</strong>: understanding not just how many images you have, but how varied they are across lighting conditions, venues, distances, and image quality. Three tools did the most work:</p>
+<p><strong>Perceptual hashing</strong> finds near-duplicates. Race photographers shoot in bursts - a five-second finish line sequence produces 40 nearly identical images. If those end up split across training and validation sets, your validation metrics are flattering you: the model is essentially measuring memory, not learning. Running this takes minutes and costs nothing. Run it before you label anything.</p>
+<p><strong>Brightness and resolution distributions</strong> quantify how narrow your data conditions are. A brightness histogram with a sharp spike means your dataset probably came from one time of day at similar venues. The model will struggle with overcast conditions, evening races, or any lighting it hasn&#39;t seen. Resolution matters specifically for small object detection: a bib on a runner in the background of a crowd shot might be 30×15 pixels. If the training set doesn&#39;t have small objects, the model never learns to detect at that scale. (This came back in the results.)</p>
+<img src="../images/dataset_distributions.png" alt="Histograms showing brightness, contrast, and resolution distributions across the 217-image dataset" style="max-width: 100%; height: auto; display: block; margin: 0 auto;">
+
+<p>Brightness and contrast both show reasonable spread - the dataset isn&#39;t locked to a single lighting condition. The resolution chart tells the more important story: the vast majority of images are clustered at 2–4 megapixels, with only a handful of higher-resolution images in the tail. That spike is a direct signal that the dataset was thin on high-resolution images of distant runners - exactly where bibs appear as small, hard-to-detect objects. This came back in the results: bib size was the dominant predictor of missed detections, and both models missed bibs at the lower end of the size range because they&#39;d barely seen them in training.</p>
+<p><strong>CLIP embeddings projected with UMAP</strong> is the most powerful tool and the one most engineering teams have never encountered. CLIP converts images into numerical vectors that capture semantic content - similar images cluster near each other. UMAP projects those high-dimensional vectors down to two dimensions. The output is a scatter plot where each dot is one image, colored by source. What you&#39;re looking for is interleaving: images from different sources spread across the plot, not tight clusters that map to a single race. A cluster that corresponds to one source means those images are semantically redundant.</p>
+<img src="../images/clip-umap-clusters.png" alt="CLIP embeddings projected with UMAP, showing image sources interleaved across the plot. Highlighted clusters illustrate what homogeneous single-source data would look like." style="max-width: 100%; height: auto; display: block; margin: 0 auto;">
+
+<p><em>The dots in this dataset are well-mixed across sources - no tight single-color clusters. The annotated ellipses show what the plot would look like if all images came from just a few races.</em></p>
+<p>Final dataset: 217 images across 8 sources, varied lighting, terrain, and race types. 174 training images, 22 validation, 21 test - the test set held out and never touched until final evaluation.</p>
+<p>The parallel to the LLM eval setup is direct: in that project, defining the gold standard and freezing the test set before running any models was what made the comparison meaningful. Here, understanding the dataset composition before labeling served the same function. The methodology decision comes first. Once you skip it, everything downstream is building on sand.</p>
+<hr>
+<h2>YOLOv8n: The Baseline</h2>
+<p>YOLOv8 nano is the smallest variant of the most widely used object detection family. Three million parameters, roughly 10ms inference per image on Apple M4, a mature codebase with years of community documentation behind it.</p>
+<p>Training ran for 89 epochs. The model peaked at epoch 75; early stopping correctly halted at 89 and saved the best weights. <strong>Final test set results</strong> (21 images, 50 ground-truth bibs):</p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Score</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>mAP50</td>
+<td>0.940</td>
+</tr>
+<tr>
+<td>mAP50-95</td>
+<td>0.619</td>
+</tr>
+<tr>
+<td>Precision</td>
+<td>0.960</td>
+</tr>
+<tr>
+<td>Recall</td>
+<td>0.957</td>
+</tr>
+<tr>
+<td>F1</td>
+<td>0.932</td>
+</tr>
+<tr>
+<td>False Positives</td>
+<td>5</td>
+</tr>
+<tr>
+<td>False Negatives</td>
+<td>2</td>
+</tr>
+</tbody></table>
+<p>0.940 mAP50 on a first run with 174 training images is a strong result. Transfer learning does most of the work: YOLOv8n starts from weights pretrained on millions of general images, so it already knows how to parse visual structure. Fine-tuning on 174 images redirects that knowledge toward one specific task.</p>
+<p>The gap between mAP50 (0.940) and mAP50-95 (0.619) matters for how you define the task. mAP50 asks &quot;did you find it?&quot; - the predicted box needs to overlap the actual bib by 50%. mAP50-95 averages accuracy across overlap thresholds from 50% all the way up to 95%. The large gap means the model reliably finds bibs but draws boxes that are sometimes too large, too small, or slightly offset. For a &quot;is there a bib in this photo?&quot; use case, this is fine. For reading the bib number via OCR on the cropped region, you need both scores high.</p>
+<p>The 5 false positives averaged 0.579 confidence; the 48 true positives averaged 0.844. A 0.265-point gap between correct and incorrect detections is a good calibration signal - when the model is wrong, it &quot;knows&quot; something is off.</p>
+<img src="../images/false-positive-object-detection.jpg" alt="YOLOv8n detecting two race bibs correctly and flagging a false positive on a runner's shorts at 0.26 confidence" style="max-width: 500px; width: 100%; height: auto; display: block; margin: 0 auto;">
+
+<p><em>The detection on the running shorts - &quot;bib 0.26&quot; - is a false positive. The model&#39;s confidence there (0.26) is well below the 0.844 average for correct detections, which reflects good calibration: the model is less certain when it&#39;s wrong. At the default confidence threshold of 0.25, this low-confidence detection still makes it through. Raising the threshold to 0.50 would filter it out, along with other uncertain predictions. That tradeoff - higher precision in exchange for occasionally missing a real but borderline bib (like the one of the furthest runner in this photo at 0.38) - is a tuning decision that depends on what matters more in the deployment context.</em></p>
+<hr>
+<h2>The Model Comparison</h2>
+<p>I trained RF-DETR Nano on the same 217-image dataset with the same compute budget and evaluation methodology.</p>
+<p><strong>One operational caveat before the numbers:</strong> RF-DETR saves three checkpoint files during training - the regular best, the EMA (smoothed) best, and the end-of-training checkpoint. My first evaluation used the wrong one (end-of-training rather than EMA best) and got dramatically worse results. Similarly, when computing mAP manually, pre-filtering detections by confidence before calling a metric library truncates the precision-recall curve and produces a lower score than the model actually achieves. The corrected methodology revealed RF-DETR is substantially more competitive than the initial numbers suggested. The parallel to the LLM eval is exact: methodology determines what you&#39;re measuring, and wrong methodology is invisible until you check it.</p>
+<p><strong>Test set comparison</strong> (21 images, 50 ground-truth bibs):</p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>YOLOv8n (3M params)</th>
+<th>RF-DETR Nano (6.5M params)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>mAP50</td>
+<td><strong>0.940</strong></td>
+<td>0.933</td>
+</tr>
+<tr>
+<td>mAP50-95</td>
+<td>0.619</td>
+<td><strong>0.626</strong></td>
+</tr>
+<tr>
+<td>Precision</td>
+<td>0.960</td>
+<td><strong>0.977</strong></td>
+</tr>
+<tr>
+<td>Recall</td>
+<td><strong>0.957</strong></td>
+<td>0.860</td>
+</tr>
+<tr>
+<td>F1</td>
+<td><strong>0.932</strong></td>
+<td>0.915</td>
+</tr>
+<tr>
+<td>False Positives</td>
+<td>5</td>
+<td><strong>1</strong>*</td>
+</tr>
+<tr>
+<td>False Negatives</td>
+<td><strong>2</strong></td>
+<td>7</td>
+</tr>
+<tr>
+<td>License</td>
+<td>AGPL-3.0</td>
+<td><strong>Apache 2.0</strong></td>
+</tr>
+</tbody></table>
+<p><em>RF-DETR&#39;s single false positive was a background runner&#39;s bib that wasn&#39;t annotated - the model was right, the label was missing.</em></p>
+<img src="../images/vision-model-comparison.png" alt="Bar chart comparing RF-DETR Nano vs YOLOv8n on mAP50, mAP50-95, Precision, Recall, and F1 on the test split" style="max-width: 100%; height: auto; display: block; margin: 0 auto;">
+
+<p><em>The models trade wins depending on which metric you look at. RF-DETR edges ahead on precision (0.977 vs 0.960) and localization quality (mAP50-95: 0.626 vs 0.619). YOLOv8n leads on recall (0.957 vs 0.860) - it misses fewer bibs. The recall gap is the most operationally meaningful difference.</em></p>
+<p>The mAP50 headline numbers - 0.940 vs 0.933 - are close enough that random variation in a 21-image test set explains some of the gap. Both models are near the ceiling for this dataset size.</p>
+<p>The recall gap is real and consistent. YOLOv8n found 48 of 50 bibs; RF-DETR found 43. That pattern held across training and validation splits - RF-DETR missed about 1 in 8 training bibs even on data it was trained on, which looks structural rather than a generalization issue.</p>
+<p>RF-DETR&#39;s single false positive turned out to be a labeling error: a real bib that was genuinely present in the image but not annotated. When a model consistently fires on something with no label, the question cuts both ways - the model might be right. Consistent discrepancies between predictions and labels are worth checking as potential annotation gaps, not just prediction errors.</p>
+<hr>
+<h2>What Actually Determines Whether a Bib Gets Detected</h2>
+<p>This is the second step most teams skip: <strong>Failure Mode Analysis</strong>.</p>
+<p>YOLOv8n hit 0.940 mAP50. RF-DETR Nano hit 0.933 mAP50. If your target is 90%, both models cleared it. The natural instinct is to pick one, close the notebook, and ship. That instinct is worth resisting.</p>
+<p>A headline accuracy number tells you how often the model is right. It doesn&#39;t tell you <em>when</em> it&#39;s wrong, <em>what</em> it&#39;s missing, or whether the failures are random noise or a systematic gap that will surface predictably in production. Two models can have the same mAP50 with completely different failure distributions - one misses small distant bibs, the other misses edge-of-frame bibs. Those failure modes have different operational consequences and different fixes. You can&#39;t see any of that from the headline number alone.</p>
+<p>After training both models, I ran a failure analysis across all 217 labeled images: extract every bib annotation, compute attributes (size, brightness, contrast, sharpness, position in frame), and compare detected bibs to missed ones. The gap was obvious.</p>
+<p><strong>Bib size explains almost everything.</strong></p>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Median area of detected bibs</th>
+<th>Median area of missed bibs</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>YOLOv8n</td>
+<td>1,218 px²</td>
+<td>189 px²</td>
+</tr>
+<tr>
+<td>RF-DETR Nano</td>
+<td>1,391 px²</td>
+<td>236 px²</td>
+</tr>
+</tbody></table>
+<p>The bibs both models miss are roughly <strong>six times smaller</strong> than the bibs they detect. A 189 px² bib is about 14×14 pixels - a runner 50 meters from the camera. A 1,218 px² bib is about 35×35 pixels - a runner at 10 meters. This holds across all three splits and both architectures.</p>
+<img src="../images/bib-size-detected-vs-missed.png" alt="Histograms of bib area in pixels squared for detected vs. missed bibs, shown for both YOLOv8n and RF-DETR Nano across all 217 images. Missed bibs cluster at the far left of the distribution." style="max-width: 100%; height: auto; display: block; margin: 0 auto;">
+
+<p><em>Missed bibs (red) cluster at the left edge of the distribution - 100 to 300 px² - while detected bibs peak around 1,000 px². The separation is nearly complete. Both models fail in the same size range, which points to a training data gap rather than an architecture limitation.</em></p>
+<p>Here&#39;s what that looks like on the same image:</p>
+<img src="../images/small-bib-comparison.png" alt="Side-by-side comparison of RF-DETR Nano and YOLOv8n on the same race photo. RF-DETR detects only the two foreground runners cleanly; YOLOv8n catches those plus background runners, but also fires on the crowd with several low-confidence detections." style="max-width: 100%; height: auto; display: block; margin: 0 auto;">
+
+<p><em>RF-DETR Nano finds the two foreground bibs and stops there. YOLOv8n finds those plus a background runner&#39;s bib - but also generates several low-confidence detections in the crowd. This is the precision/recall tradeoff made concrete: RF-DETR is more conservative, YOLOv8n casts a wider net. Neither model picks up the most distant runners, where bibs are smallest.</em></p>
+<p>The training set&#39;s median bib area was 1,224 px². Bibs in the 200–400 px² range - the failure zone - were a small minority of training examples. The models haven&#39;t learned to handle the lower end of the bib size range because they&#39;ve barely seen it. This is the direct consequence of a gap that Dataset Diversity Analysis would have caught before labeling: the training distribution was thin at exactly the object sizes where the models would later fail.</p>
+<p>This also illustrates something worth carrying into any ML project: switching architectures won&#39;t fix a training data problem. Adding 50–100 images specifically of distant runners - where bibs appear as 10–20 pixel objects - would directly address the primary failure mode for both models equally. More architecture is not a substitute for understanding your data.</p>
+<p>The sharpness finding is counterintuitive and worth flagging: missed bibs appeared in <em>sharper</em> images, not blurrier ones. This is confounding. Telephoto lenses capture distant runners clearly - sharp image, small bib. When bib size is the dominant predictor of failure, any attribute that correlates with small bibs will appear to correlate with misses. Chasing a correlation without checking for confounds would send you in the wrong direction.</p>
+<p><strong>The one meaningful architectural difference in failure modes:</strong> RF-DETR misses edge-of-frame bibs at nearly twice the rate of YOLOv8n (1.97x distance-from-center ratio versus 1.37x). RF-DETR runs at 560px versus YOLOv8n&#39;s 640px; edge regions are more likely to be cropped or represented at lower effective resolution. The worst single case: a crowd scene with 25 bibs where RF-DETR missed 15 and YOLOv8n missed 3.</p>
+<hr>
+<h2>Making the Architecture Decision</h2>
+<p>This project was too small to make confident claims about which architecture is &quot;better&quot; - the nano variants of both models are at the lower end of what each family offers, and 174 training images is a thin dataset by production standards. What the experiment does reveal are the tradeoffs worth working through when evaluating these architectures for a similar task.</p>
+<p><strong>Recall vs. precision:</strong> YOLOv8n found 48 of 50 bibs; RF-DETR found 43. If missing a detection is more costly than a false alarm - a person detection system, a safety inspection pipeline - that gap is meaningful. If false positives carry a higher operational cost, RF-DETR&#39;s more conservative behavior is worth something.</p>
+<p><strong>Licensing as a constraint:</strong> This belongs at the beginning of the decision, not the end. AGPL-3.0 means any network-accessible service using the model must open-source that service - a real constraint for commercial SaaS, which would require a paid Ultralytics commercial license. Apache 2.0 has no such requirement. Treat this the same way you&#39;d treat a latency or availability constraint: establish it first, then evaluate models that actually fit.</p>
+<p><strong>Localization quality:</strong> RF-DETR edged ahead on mAP50-95 (0.626 vs 0.619), meaning its bounding boxes were slightly tighter on average. If downstream processing depends on tight crops - reading bib numbers via OCR, for example - that&#39;s relevant.</p>
+<p><strong>Ecosystem maturity:</strong> YOLOv8n has years of community documentation, integrations, and deployment patterns behind it. RF-DETR is newer. For a team without deep CV experience, the gap in available resources is a practical consideration.</p>
+<p>The point isn&#39;t that one model is the right answer. It&#39;s that these tradeoffs exist, they can be measured, and the right choice depends on what &quot;works&quot; means in the specific deployment context - which has to be defined before the metric table means anything.</p>
+<hr>
+<h2>Questions Engineering Leaders Should Be Asking</h2>
+<p>In the LLM piece, I noted that teams skip the calibration test - and if your pipeline uses a confidence score to route cases to human review, an uncalibrated model means your human review safety net isn&#39;t catching what you think it&#39;s catching. Vision models have the same gap, one step earlier.</p>
+<p>If your team is building vision systems, or any ML product that depends on training data:</p>
+<p><strong>&quot;Where did the data come from, and how many distinct sources?&quot;</strong> A single-source dataset is a red flag regardless of size. Ten thousand images from one venue can be less useful than a thousand images from ten varied sources. Ask to see the source breakdown.</p>
+<p><strong>&quot;Have you done a Dataset Diversity Analysis, and what did you find?&quot;</strong> If the answer is &quot;we looked at some images and it seemed fine,&quot; that&#39;s not an analysis. Ask to see the diversity visualization. Ask what the object size distribution looks like. Ask where the training distribution is thin.</p>
+<p><strong>&quot;What does a failure look like, and have you gone looking for it?&quot;</strong> The most useful evaluation is not the mAP number on the validation set - it&#39;s whether the team has deliberately tested on images that look different from the training data. What conditions are underrepresented? What does the model do in those conditions?</p>
+<p><strong>&quot;What&#39;s the license, and does it fit our deployment model?&quot;</strong> This belongs at architecture decision time, not after training is complete. AGPL-3.0 and Apache 2.0 have materially different implications for commercial products.</p>
+<p><strong>&quot;What would you do differently with the dataset if you had another week?&quot;</strong> A team that has done a real Dataset Diversity Analysis will have a specific answer: more images of distant runners, more low-light examples, more coverage of a specific race type. A team that hasn&#39;t will say &quot;probably get more data.&quot;</p>
+<hr>
+<h2>The Same Problem at a Different Layer</h2>
+<p>Both projects came back to the same problem: the visible output looks fine, so most teams stop there.</p>
+<p>In the LLM pipeline: GPT-4o-mini produced coherent reasoning, valid schemas, and plausible-sounding assessments. It was barely better than random. You needed the eval to see it.</p>
+<p>In the vision project: a dataset that looked diverse turned out to be almost entirely from the same finish line and lighting conditions. You needed the distribution analysis to see it.</p>
+<p>Both are cases where the visible artifact - model output, dataset size - appeared good while the underlying quality was not. And in both cases, the work to find the gap was a weekend, not a quarter. Run the eval. Run the Dataset Diversity Analysis. The cost of not knowing is paid in production.</p>
+<p>The code for this project, including the EDA notebooks and training scripts, is available at <a href="https://github.com/lilacmohr/race-vision">github.com/lilacmohr/race-vision</a>. The LLM eval framework is at <a href="https://github.com/lilacmohr/pr-impact-analyzer">github.com/lilacmohr/pr-impact-analyzer</a>.</p>
+<hr>
+
+    </article>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <span class="footer-brand">Lilac Mohr</span>
+            <div class="footer-links">
+                <a href="https://www.linkedin.com/in/lilac-mohr/" target="_blank" rel="noopener">LinkedIn</a>
+                <p>&copy; 2026 All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
