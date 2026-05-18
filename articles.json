@@ -2,7 +2,7 @@
   "articles": [
     {
       "id": "race-vision",
-      "title": "The Dataset Is the Decision: What Training a Vision Model Taught Me About Model Selection",
+      "title": "The Dataset Is the Decision: What Training a Vision Model Taught Me About Dataset Diversity",
       "category": "implementation",
       "date": "2026-05-17",
       "displayOrder": 0,

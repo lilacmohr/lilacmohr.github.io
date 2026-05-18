@@ -1,4 +1,4 @@
-# The Dataset Is the Decision: What Training a Vision Model Taught Me About Model Selection
+# The Dataset Is the Decision: What Training a Vision Model Taught Me About Dataset Diversity
 
 *I trained two object detection models on the same 217-image dataset to compare architecture choices and licensing tradeoffs.*
 
